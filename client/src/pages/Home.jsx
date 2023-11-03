@@ -1,18 +1,81 @@
-import React from 'react';
-import '../style.css';
+import React from "react";
+import "../style.css";
+import logo from "../assets/proj3.png";
 
 export default function Game() {
   const containerStyle = {
-    marginTop: '10vh',
+    marginTop: "10vh",
   };
 
   const cardStyle = {
-    maxWidth: '60%',
-    padding: '20px',
+    marginTop: "10vh",
+    maxWidth: "60%",
+    padding: "20px",
   };
 
-  const buttonStyle = {
-    width: '75%',
+  const buttonGroupStyle = {
+    display: "flex",
+    justifyContent: "center", // Align buttons horizontally in the center
+  };
+
+  const button1Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
+  const button2Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
+  const button3Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
+  const imageStyle = {
+    width: "90px",
+  };
+
+  const getFormattedDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return mm + '/' + dd + '/' + yyyy;
+  };
+
+  const cardBottomStyle = {
+    marginTop: "20px",
+    textAlign: 'center', // Center align the text
+    fontSize: 'smaller', // Make the text smaller
   };
 
   return (
@@ -23,19 +86,35 @@ export default function Game() {
       >
         <div className="card text-center bg-dark text-light" style={cardStyle}>
           <div className="card-body">
-            <h2 className="card-title">S u d o k u</h2>
-            <button className="btn btn-dark d-block mx-auto mb-2" style={buttonStyle}>
-              Button 1
-            </button>
-            <button className="btn btn-dark d-block mx-auto mb-2" style={buttonStyle}>
-              Button 2
-            </button>
-            <button className="btn btn-dark d-block mx-auto" style={buttonStyle}>
-              Button 3
-            </button>
+            <div className="picture">
+              <img src={logo} alt="logo to our app" style={imageStyle} />
+            </div>
+            <h2 className="card-title">Sudoku</h2>
+            <p className="cardDescription">
+              Fill in each square, don't repeat numbers in the same box or line
+            </p>
+            <div style={buttonGroupStyle}>
+              <a
+                href="/Instructions"
+                className="btn"
+                style={button1Style}
+              >
+                How to Play
+              </a>
+              <a href="/Login" className="btn" style={button2Style}>
+                Login
+              </a>
+              <a href="/Game" className="btn" style={button3Style}>
+                Play
+              </a>
+            </div>
+            <div className="cardBottom" style={cardBottomStyle}>
+            {getFormattedDate()}
+          </div>
           </div>
         </div>
-      </div><div class="wrap">
+      </div>
+      <div class="wrap">
         <svg class="svg">
           <text
             x="10"
@@ -143,6 +222,7 @@ export default function Game() {
             9
           </text>
         </svg>
-      </div></>
-  )
+      </div>
+    </>
+  );
 }

@@ -9,7 +9,7 @@ body {
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #3b3d54;
+  background-color: rgb(59, 84, 61);
   font-size: 14px;
   overflow: hidden;
 }
@@ -18,6 +18,15 @@ body {
   position: relative;
   z-index: 999; /* Set a higher z-index for the row background */
   background-color: transparent; /* Make the background of the row transparent */
+}
+
+.card-title{
+  margin-top: 15px;
+  font-size: 35pt;
+}
+
+.cardDescription{
+  font-size: 20pt;
 }
 
 .wrap {
