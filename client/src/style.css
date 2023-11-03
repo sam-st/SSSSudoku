@@ -20,6 +20,10 @@ body {
   background-color: transparent; /* Make the background of the row transparent */
 }
 
+.card-title{
+  margin-top: 15px;
+}
+
 .wrap {
   perspective-origin: 50% 50%;
   position: relative;

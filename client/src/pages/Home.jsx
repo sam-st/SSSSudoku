@@ -1,18 +1,39 @@
-import React from 'react';
-import '../style.css';
+import React from "react";
+import "../style.css";
+import logo from "../assets/proj3.png";
 
 export default function Game() {
   const containerStyle = {
-    marginTop: '10vh',
+    marginTop: "10vh",
   };
 
   const cardStyle = {
-    maxWidth: '60%',
-    padding: '20px',
+    maxWidth: "60%",
+    padding: "20px",
   };
 
-  const buttonStyle = {
-    width: '75%',
+  const buttonGroupStyle = {
+    display: "flex",
+    justifyContent: "center", // Align buttons horizontally in the center
+  };
+
+  const button1Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+  };
+
+  const button2Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+  };
+
+  const button3Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+  };
+
+  const imageStyle = {
+    width: "90px",
   };
 
   return (
@@ -23,19 +44,32 @@ export default function Game() {
       >
         <div className="card text-center bg-dark text-light" style={cardStyle}>
           <div className="card-body">
+            <div className="picture">
+              <img src={logo} alt="logo to our app" style={imageStyle} />
+            </div>
             <h2 className="card-title">S u d o k u</h2>
-            <button className="btn btn-dark d-block mx-auto mb-2" style={buttonStyle}>
-              Button 1
-            </button>
-            <button className="btn btn-dark d-block mx-auto mb-2" style={buttonStyle}>
-              Button 2
-            </button>
-            <button className="btn btn-dark d-block mx-auto" style={buttonStyle}>
-              Button 3
-            </button>
+            <p>
+              Fill in each square, don't repeat numbers in the same box or line
+            </p>
+            <div style={buttonGroupStyle}>
+              <a
+                href="/Instructions"
+                className="btn btn-dark"
+                style={button1Style}
+              >
+                How to Play
+              </a>
+              <a href="/Login" className="btn btn-dark" style={button2Style}>
+                Login
+              </a>
+              <a href="/Game" className="btn btn-dark" style={button3Style}>
+                Play
+              </a>
+            </div>
           </div>
         </div>
-      </div><div class="wrap">
+      </div>
+      <div class="wrap">
         <svg class="svg">
           <text
             x="10"
@@ -143,6 +177,7 @@ export default function Game() {
             9
           </text>
         </svg>
-      </div></>
-  )
+      </div>
+    </>
+  );
 }
