@@ -1,145 +1,201 @@
+import InstructionsModal from "../components/InstructionsModal";
+import MyScoresModal from "../components/MyScoresModal";
+import LeaderBoardModal from "../components/LeaderBoardModal";
+import Button from 'react-bootstrap/Button';
+
+
 export default function Game() {
   return (
     <div>
-      <table border="2">
-        {/* Outermost caption tag for enclosing table information */}
-        <caption>
-          <h4>Sudoku Puzzle</h4>
-          {/* <p><em>Directions</em>: Have each 3x3 square, each row, and each column have a number from 1 - 9. No repeat numbers allowed per row, column, or 3x3 square.</p> */}
-        </caption>
-        {/* <thead> tag is commonly used to include informative description of table  */}
-        <thead>
-          {/* <!-- The <tr> tag represents the first `row` of the table --> */}
-          <tr class="border border-primary">
-            {/* <!-- These <th> tags are header columns, one for difficulty, and one for the difficulty level (Easy) --> */}
-            <th colspan="5" style={{ border: "none" }}>Difficulty</th>
-            <th colspan="3" style={{ border: "none" }}>Easy</th>
-          </tr>
-        </thead>
-        <tr class="border border-primary">
-          {/* <!-- First three cells have a 3, 9, and 8 --> */}
-          <td>3</td>
-          <td>9</td>
-          <td>8</td>
-          {/* <!-- empty cells filled with non-breaking spaces to give more whitespace --> */}
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>2</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>8</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>3</td>
-          <td>5</td>
-          <td>9</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>1</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>4</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>4</td>
-          <td>9</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>1</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>8</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>6</td>
-          <td>9</td>
-          <td>5</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>4</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>4</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>5</td>
-          <td>9</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>5</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>3</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>7</td>
-          <td>8</td>
-          <td>6</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>2</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>1</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>7</td>
-          <td>8</td>
-          <td>2</td>
-        </tr>
-      </table>    
+      <div className="text-center">
+
+        <div class="position-relative">
+          <div class="position-absolute top-0 end-0 mt-1">
+            <MyScoresModal />
+            <InstructionsModal />
+            <LeaderBoardModal />
+          </div>
+          <div class="position-absolute top-0 start-0 mt-1">
+
+            <label className="m-2" for="difficulty">Difficulty Level:</label>
+            <select name="difficulty" id="difficulty">
+              <option value="easy38">Easy</option>
+              <option value="medium26">Medium</option>
+              <option value="hard24">Hard</option>
+            </select>
+          </div>
+          <h1 className="mt-4">Sudoku Puzzle</h1>
+        </div>
+        <div >
+
+          
+          <div class="position-relative">
+            <table className="position-absolute" width="85%"  border="2">
+
+              <tr class="border border-primary">
+                <td className="border border-primary>">3</td>
+                <td className="border border-primary>">9</td>
+                <td className="border border-primary>">8</td>
+                {/* <!-- empty cells filled with non-breaking spaces to give more whitespace --> */}
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;&nbsp;</td>
+              </tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">2</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">8</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">3</td>
+                <td className="border border-primary>">5</td>
+                <td className="border border-primary>">9</td>
+              </tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">1</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">4</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+              </tr>
+              <tr>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+
+              </tr>
+              <tr class="border border-primary"></tr>
+              <tr class="border border-primary"></tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">4</td>
+                <td className="border border-primary>">9</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">1</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+              </tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">8</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">6</td>
+                <td className="border border-primary>">9</td>
+                <td className="border border-primary>">5</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">4</td>
+              </tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">4</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">5</td>
+                <td className="border border-primary>">9</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+              </tr>
+              <tr>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+                <td className="bg-secondary"></td>
+
+              </tr>
+              <tr class="border border-primary"></tr>
+              <tr class="border border-primary"></tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">5</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">3</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+              </tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">7</td>
+                <td className="border border-primary>">8</td>
+                <td className="border border-primary>">6</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">2</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">1</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+              </tr>
+              <tr class="border border-primary">
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="border border-primary>">&nbsp;&nbsp;</td>
+                <td className="bg-secondary"></td>
+                <td className="border border-primary>">7</td>
+                <td className="border border-primary>">8</td>
+                <td className="border border-primary>">2</td>
+              </tr>
+            </table>
+            
+
+            <div class="position-absolute top-0 end-0">
+        <Button className="btn btn-primary-lg">Verify</Button>
+        <Button className="btn btn-primary-lg">Try Again</Button>
+        <h4>Login to Save:</h4>
+        <Button className="btn btn-primary-lg">Login</Button>
       </div>
+</div>
+          </div>
+        </div>
+      </div>
+
+  
   )
 }

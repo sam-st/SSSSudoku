@@ -10,7 +10,7 @@ import App from './App';
 import Error from './pages/Error';
 import Game from './pages/GameBoard';
 import Home from './pages/Home';
-import Instructions from './pages/Instructions';
+import Instructions from './components/Instructions';
 
 // Define the accessible routes, and which components respond to which URL
 const router = createBrowserRouter([
