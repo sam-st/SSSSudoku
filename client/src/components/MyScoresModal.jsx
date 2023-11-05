@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import "../assets/style/Modal.css";
 
 function MyScoresModal() {
   const [show, setShow] = useState(false);
@@ -10,13 +11,13 @@ function MyScoresModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>See My Scores
+      <Button className="scoresModal "onClick={handleShow}>See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
           <Modal.Title>My Scores</Modal.Title>
         </Modal.Header>
-        <Modal.Body><table>
+        <Modal.Body><table className='myTable'>
   <tr className='border border-primary'>
     <th className='border border-primary'>Date</th>
     <th className='border border-primary'>Difficulty</th>
