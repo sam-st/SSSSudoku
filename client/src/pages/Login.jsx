@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 function Login() {
   const [loginUsername, setLoginUsername] = useState('');
@@ -25,35 +25,35 @@ function Login() {
       <Row>
         <Col>
           <h1>Login</h1>
-          <form onSubmit={handleLoginSubmit}>
-            <label>
-              Username:
-              <input type="text" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} />
-            </label>
-            <label>
-              Password:
-              <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-            </label>
-            <input type="submit" value="Login" />
-          </form>
+          <Form onSubmit={handleLoginSubmit}>
+            <Form.Group controlId="loginUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="loginPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+            </Form.Group>
+            <Button variant="primary" type="submit">Login</Button>
+          </Form>
         </Col>
         <Col>
           <h1>Sign Up</h1>
-          <form onSubmit={handleSignupSubmit}>
-            <label>
-              Username:
-              <input type="text" value={signupUsername} onChange={(e) => setSignupUsername(e.target.value)} />
-            </label>
-            <label>
-              Password:
-              <input type="password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
-            </label>
-            <label>
-              Email:
-              <input type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
-            </label>
-            <input type="submit" value="Sign Up" />
-          </form>
+          <Form onSubmit={handleSignupSubmit}>
+            <Form.Group controlId="signupUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" value={signupUsername} onChange={(e) => setSignupUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="signupPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="signupEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
+            </Form.Group>
+            <Button variant="primary" type="submit">Sign Up</Button>
+          </Form>
         </Col>
       </Row>
     </Container>
