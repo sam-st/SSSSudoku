@@ -1,35 +1,229 @@
+import React from "react";
+import "../style.css";
+import logo from "../assets/proj3.png";
+
 export default function Game() {
-  
+
+  const containerStyle = {
+    marginTop: "10vh",
+  };
+
+  const cardStyle = {
+    marginTop: "10vh",
+    maxWidth: "60%",
+    padding: "20px",
+  };
+
+  const buttonGroupStyle = {
+    display: "flex",
+    justifyContent: "center", // Align buttons horizontally in the center
+  };
+
+  const button1Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
+  const button2Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
+  const button3Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
+  const imageStyle = {
+    width: "90px",
+  };
+
+  const getFormattedDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return mm + '/' + dd + '/' + yyyy;
+  };
+
+  const cardBottomStyle = {
+    marginTop: "20px",
+    textAlign: 'center', // Center align the text
+    fontSize: 'smaller', // Make the text smaller
+  };
+
   return (
-    <div>
-
-<body>
-
-<div className="container">
-  <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">How to Play</button>
-
-  <div className="modal fade" id="myModal" role="dialog">
-    <div className="modal-dialog">
-    
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal">&times;</button>
-          <h4 className="modal-title">Modal Header</h4>
-        </div>
-        <div className="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+    <>
+      <div
+        className="container-fluid d-flex h-100 justify-content-center align-items-center"
+        style={containerStyle}
+      >
+        <div className="card text-center bg-dark text-light" style={cardStyle}>
+          <div className="card-body">
+            <div className="picture">
+              <img src={logo} alt="logo to our app" style={imageStyle} />
+            </div>
+            <h2 className="card-title">Sudoku</h2>
+            <p className="cardDescription">
+              Fill in each square, don't repeat numbers in the same box or line
+            </p>
+            <div style={buttonGroupStyle}>
+              <a
+                href="/Instructions"
+                className="btn"
+                style={button1Style}
+              >
+                How to Play
+              </a>
+              <a href="/Login" className="btn" style={button2Style}>
+                Login
+              </a>
+              <a href="/Game" className="btn" style={button3Style}>
+                Play
+              </a>
+            </div>
+            <div className="cardBottom" style={cardBottomStyle}>
+            {getFormattedDate()}
+          </div>
+          </div>
         </div>
       </div>
-      
-    </div>
-  </div>
-  
-</div>
+      <div class="wrap">
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            1
+          </text>
+        </svg>
 
-</body>
-    </div>
-  )
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            2
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            3
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            4
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            5
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            6
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            7
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            8
+          </text>
+        </svg>
+
+        <svg class="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="white"
+          >
+            9
+          </text>
+        </svg>
+      </div>
+    </>
+  );
 }
