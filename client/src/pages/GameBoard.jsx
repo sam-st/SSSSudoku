@@ -17,23 +17,23 @@ const initial =
     [0, 4, 5, 0, 0, 0, 2, 0, 9],
     [0, 0, 0, 0, 3, 0, 0, 7, 0]
   ]
-export default function Game() {
-  const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
+  export default function Game() {
+    const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
 
-  function getDeepCopy(arr) {
-    return JSON.parse(JSON.stringify(arr));
-  }
-
-  function onInputChange(e, row, col) {
-    var val = parseInt(e.target.value) || 0, grid = getDeepCopy(sudokuArr);
-    if (val === 0 || val >= 1 && val <= 9) {
-      grid[row][col] = val;
+    function getDeepCopy(arr) {
+      return JSON.parse(JSON.stringify(arr));
     }
-  }
+    
+    function onInputChange(e, row, col) {
+      var val = parseInt(e.target.value) || 0, grid = getDeepCopy(sudokuArr);
+      if (val === 0 || val >= 1 && val <= 9) {
+        grid[row][col] = val;
+      }
+    }
   return (
-    <div>
-      <div className="text-center">
+    <div className="background">
 
+              <div className="text-center">
         
           {/* <h1 className="mt-4">Sudoku Puzzle</h1> */}
         </div>
