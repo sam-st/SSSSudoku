@@ -17,7 +17,9 @@ function LeaderBoardModal() {
         <Modal.Header closeButton>
           <Modal.Title>High Scores</Modal.Title>
         </Modal.Header>
-        <Modal.Body><table>
+        <Modal.Body>
+          
+          <table>
   <tr className='border border-primary'>
     <th className='border border-primary'>User Name</th>
     <th className='border border-primary'>Difficulty</th>
