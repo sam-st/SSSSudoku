@@ -1,145 +1,100 @@
+import InstructionsModal from "../components/InstructionsModal";
+import MyScoresModal from "../components/MyScoresModal";
+import LeaderBoardModal from "../components/LeaderBoardModal";
+import Button from 'react-bootstrap/Button';
+import "../assets/style/GameBoard.css";
+import { useState } from 'react';
+
+const initial =
+  [
+    [0, 5, 0, 9, 0, 0, 0, 0, 0],
+    [8, 0, 0, 0, 4, 0, 3, 0, 7],
+    [0, 0, 0, 2, 8, 0, 1, 9, 0],
+    [5, 3, 8, 6, 0, 7, 9, 4, 0],
+    [0, 2, 0, 3, 0, 1, 0, 0, 0],
+    [1, 0, 9, 8, 0, 4, 6, 2, 3],
+    [9, 0, 7, 4, 0, 0, 0, 0, 0],
+    [0, 4, 5, 0, 0, 0, 2, 0, 9],
+    [0, 0, 0, 0, 3, 0, 0, 7, 0]
+  ]
 export default function Game() {
+  const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
+
+  function getDeepCopy(arr) {
+    return JSON.parse(JSON.stringify(arr));
+  }
+
+  function onInputChange(e, row, col) {
+    var val = parseInt(e.target.value) || 0, grid = getDeepCopy(sudokuArr);
+    if (val === 0 || val >= 1 && val <= 9) {
+      grid[row][col] = val;
+    }
+  }
   return (
     <div>
-      <table border="2">
-        {/* Outermost caption tag for enclosing table information */}
-        <caption>
-          <h4>Sudoku Puzzle</h4>
-          {/* <p><em>Directions</em>: Have each 3x3 square, each row, and each column have a number from 1 - 9. No repeat numbers allowed per row, column, or 3x3 square.</p> */}
-        </caption>
-        {/* <thead> tag is commonly used to include informative description of table  */}
-        <thead>
-          {/* <!-- The <tr> tag represents the first `row` of the table --> */}
-          <tr class="border border-primary">
-            {/* <!-- These <th> tags are header columns, one for difficulty, and one for the difficulty level (Easy) --> */}
-            <th colspan="5" style={{ border: "none" }}>Difficulty</th>
-            <th colspan="3" style={{ border: "none" }}>Easy</th>
-          </tr>
-        </thead>
-        <tr class="border border-primary">
-          {/* <!-- First three cells have a 3, 9, and 8 --> */}
-          <td>3</td>
-          <td>9</td>
-          <td>8</td>
-          {/* <!-- empty cells filled with non-breaking spaces to give more whitespace --> */}
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>2</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>8</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>3</td>
-          <td>5</td>
-          <td>9</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>1</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>4</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>4</td>
-          <td>9</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>1</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>8</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>6</td>
-          <td>9</td>
-          <td>5</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>4</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>4</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>5</td>
-          <td>9</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary"></tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>5</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>3</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>7</td>
-          <td>8</td>
-          <td>6</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>2</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>1</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-        <tr class="border border-primary">
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td>&nbsp;&nbsp;</td>
-          <td style={{ border: "none" }}></td>
-          <td>7</td>
-          <td>8</td>
-          <td>2</td>
-        </tr>
-      </table>    
+      <div className="text-center">
+
+        
+          {/* <h1 className="mt-4">Sudoku Puzzle</h1> */}
+        </div>
+        <div >
+          <div class="position-relative">
+            <div className="game">
+              <div class="position-relative">
+          <div class="modalButtons position-absolute top-0 end-0">
+            <MyScoresModal/>
+            <InstructionsModal />
+            <LeaderBoardModal />
+          </div>
+          </div>
+          <div class="position-absolute top-0 start-0">
+<button className="level">
+
+            <label className="mx-2" for="difficulty">Difficulty Level:</label>
+            <select className="choices" name="difficulty" id="difficulty">
+              <option className="choices" value="easy38">Easy</option>
+              <option className="choices" value="medium26">Medium</option>
+              <option className="choices" value="hard24">Hard</option>
+            </select>
+</button>
+<div className="signInContainer">
+  <button className="signInArea">
+
+<h6 className="signInToSave">Sign in to save scores!</h6>
+<button className="signIn">Sign In</button>
+  </button>
+</div>
+          </div>
+              <div className="game-header">
+                <h3>Sudoku</h3>
+                <table>
+                  <tbody>
+                    {
+                      [0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
+                        return <tr key={rIndex} className={(row + 1) % 3 === 0 ? "bBorder" : ''}>
+                          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
+                            return <td key={rIndex + cIndex} className={(col + 1) % 3 === 0 ? "rBorder" : ''}>
+                              <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === 0 ? '' : sudokuArr[row][col]} className="cell-input" disabled={initial[row][col] != 0} />
+                            </td>
+                          })}
+
+                        </tr>
+                      })
+                    }
+                  </tbody>
+                </table>
+                <div className="buttonContainer">
+                  <button className="checkButton">Check</button>
+                  <button className="solveButton">Solve</button>
+                  <button className="resetButton">Reset</button>
+
+                </div>
+              </div>
+            </div>
+                    </div>
+        </div>
       </div>
+
+
   )
 }
