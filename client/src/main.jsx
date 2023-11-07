@@ -58,7 +58,10 @@ ReactDOM.render(
       </Routes>
       ) : (
         <Routes>
-        <Route path="*" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/instructions" element={<Instructions />} />
+        <Route path="*" element={<Home />} />
       </Routes>
       )}
      
