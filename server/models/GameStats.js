@@ -6,18 +6,23 @@ const gameStatsSchema = new Schema({
 		ref: 'User',
 		required: true,
 	},
-	gamesPlayed: {
-		type: Number,
-		default: 0,
-	},
-	gamesWon: {
-		type: Number,
-		default: 0,
-	},
-	bestScore: {
-		type: Number,
-		default: Infinity,
-	}
+	gameStats: [
+		{
+			gamesPlayed: {
+				type: Number,
+				default: 0,
+			},
+			gamesWon: {
+				type: Number,
+				default: 0,
+			},
+			bestScore: {
+				type: Number,
+				default: 0,
+			}
+		}
+	]
+
 });
 
 const GameStats = model('GameStats', gameStatsSchema);

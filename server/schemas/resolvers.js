@@ -8,6 +8,9 @@ const resolvers = {
     },
     GameStats: async () => {
       return GameStats.find();
+    },
+    GameStat: async (parent, { gameStatId }) => {
+      return GameStats.findOne({ _id: gameStatId });
     }
   },
 
@@ -34,7 +37,18 @@ const resolvers = {
 
       return { token, user };
     },
-    
+    addStat: async (parent, { gameStatId, gameStats}) => {
+      return GameStats.findOneAndUpdate(
+        { _id: gameStatId },
+        {
+          $addToSet: { gameStats: { gameStats }}
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      )
+    }
   },
 };
 
