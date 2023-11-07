@@ -3,6 +3,7 @@ import howNotToPlay from '../assets/hownottoplay.png';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import "../assets/style/Modal.css";
 
 function InstructionsModal() {
   const [show, setShow] = useState(false);
@@ -13,6 +14,9 @@ function InstructionsModal() {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
+
+      <Button className="instructionsModal" onClick={handleShow}>
+
         How to Play      </Button>
 
       <Modal show={show} onHide={handleClose}>
