@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models');
+const { User, Thought, GameStats } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -6,6 +6,9 @@ const resolvers = {
     me: async () => {
       return User.find().populate('thoughts');
     },
+    GameStats: async () => {
+      return GameStats.find();
+    }
   },
 
   Mutation: {
