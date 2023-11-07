@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-
+import { LOGIN_USER,ADD_USER  }from '../utils/mutations';
+import { useMutation } from '@apollo/react-hooks';
+import Auth from '../utils/auth';
 function Login() {
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [signupUsername, setSignupUsername] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
+  const [login, { error }] = useMutation(LOGIN_USER);
+  const [addUser] = useMutation(ADD_USER);
 
-  const handleLoginSubmit = (event) => {
+  const handleLoginSubmit =async (event) => {
     event.preventDefault();
     console.log(`Login Username: ${loginUsername}, Login Password: ${loginPassword}`);
-    // Add your login logic here
+    try{
+      const{data}=await login({ variables: { username: loginUsername, password: loginPassword } });
+    Auth.login(data.login.token);
+    }catch(e){
+      console.log(e);
+    }
+    
   };
 
-  const handleSignupSubmit = (event) => {
+  const handleSignupSubmit =async (event) => {
     event.preventDefault();
     console.log(`Signup Username: ${signupUsername}, Signup Password: ${signupPassword}, Signup Email: ${signupEmail}`);
-    // Add your sign up logic here
+    try{
+        const{data}=await addUser({ variables: { username: signupUsername, password: signupPassword, email: signupEmail } }); 
+    Auth.login(data.addUser.token);
+    }catch(e){
+      console.log(e);
+    }
+  
   };
 
   return (

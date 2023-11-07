@@ -3,6 +3,7 @@ import "../style.css";
 import logo from "../assets/proj3.png";
 
 export default function Game() {
+
   const containerStyle = {
     marginTop: "10vh",
   };
@@ -226,3 +227,4 @@ export default function Game() {
     </>
   );
 }
+

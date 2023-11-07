@@ -22,7 +22,6 @@ const gameStatsSchema = new Schema({
 			}
 		}
 	]
-
 });
 
 const GameStats = model('GameStats', gameStatsSchema);
