@@ -16,8 +16,8 @@ import App from './App';
 import Error from './pages/Error';
 import Game from './pages/GameBoard';
 import Home from './pages/Home';
+import Login from './pages/Login'
 import Instructions from './pages/Instructions';
-import Login from './pages/Login';
 import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
