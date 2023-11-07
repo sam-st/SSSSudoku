@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
 
+
 function LeaderBoardModal() {
   const [show, setShow] = useState(false);
 
@@ -11,6 +12,8 @@ function LeaderBoardModal() {
 
   return (
     <>
+      <Button variant="primary" onClick={handleShow}>See Leader Board
+
       <Button className="leaderModal" onClick={handleShow}>See Leader Board
       </Button>
       <Modal show={show} onHide={handleClose}>
