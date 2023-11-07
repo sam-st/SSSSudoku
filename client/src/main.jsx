@@ -8,8 +8,8 @@ import App from './App';
 import Error from './pages/Error';
 import Game from './pages/GameBoard';
 import Home from './pages/Home';
-import Instructions from './pages/Instructions';
-import Login from './pages/Login';
+import Instructions from './components/Instructions';
+
 
 ReactDOM.render(
   <React.StrictMode>
