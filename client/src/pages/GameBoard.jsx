@@ -56,7 +56,7 @@ const initial =
         setSudokuArr(medium());
       }
       else{
-        setSudokuArr(medium());
+        setSudokuArr(hard());
       }
     }
 
