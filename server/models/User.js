@@ -25,7 +25,7 @@ const userSchema = new Schema({
       ref: 'Thought',
     },
   ],
-  gameStats: [
+  gameStat: [
     {
       type: Schema.Types.ObjectId,
       ref: 'GameStat',
