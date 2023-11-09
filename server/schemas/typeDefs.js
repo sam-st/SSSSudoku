@@ -14,7 +14,7 @@ const typeDefs = `
   type Query {
     me: User
     GameStats: [GameStat]
-    GameStat(gameStatId: ID!): GameStat
+    GameStat(_id: String!): [GameStat]
   }
   type GameStat {
     _id: ID!

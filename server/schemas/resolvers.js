@@ -4,10 +4,11 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async () => {
-      return User.find().populate('GameStat');
+      return User.find({});
     },
-    GameStats: async () => {
-      return GameStat.find();
+    GameStats: async (parent, { _id }) => {
+      const params = _id ? { _id } : {};
+      return GameStat.find(params);
     },
     GameStat: async (parent, { gameStatId }) => {
       return GameStat.findOne({ _id: gameStatId });
@@ -37,17 +38,23 @@ const resolvers = {
 
       return { token, user };
     },
-    addGameStat: async (parent, { gameStatId, gameStat}) => {
-      return GameStat.findOneAndUpdate(
-        { _id: gameStatId },
-        {
-          $addToSet: { gameStat: { gameStat }}
-        },
+    addGameStat: async (parent, { gameStatId, gameStat }) => {
+      const stat = await GameStat.findOneAndUpdate(
+        { _id },
+        { $addToSet: { gameStat: { gameStatId } } },
         {
           new: true,
           runValidators: true,
         }
-      )
+      );
+      return stat;
+      // return GameStat.findOneAndUpdate(
+      //   { _id: gameStatId },
+      //   {
+      //     $addToSet: { gameStat: { gameStat }}
+      //   },
+
+      // )
     }
   },
 };
