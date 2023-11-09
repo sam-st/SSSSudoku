@@ -15,6 +15,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import Error from './pages/Error';
 import Game from './pages/GameBoard';
+import Difficulty from './pages/DifficultyLevel';
+
 import Home from './pages/Home';
 import Login from './pages/Login'
 import Auth from './utils/auth';
@@ -53,6 +55,7 @@ ReactDOM.render(
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/difficulty" element={<Difficulty />} />
         <Route path="/login" element={<Login />} />
         <Route path="/instructions" element={<Instructions />} />
         <Route path="*" element={<Error />} />
@@ -60,6 +63,7 @@ ReactDOM.render(
       ) : (
         <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/difficulty" element={<Difficulty />} />
         <Route path="/game" element={<Game />} />
         <Route path="/instructions" element={<Instructions />} />
         <Route path="*" element={<Home />} />

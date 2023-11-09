@@ -4,7 +4,7 @@ import LeaderBoardModal from "../components/LeaderBoardModal";
 import Button from 'react-bootstrap/Button';
 import "../assets/style/GameBoard.css";
 import { useState, useEffect } from 'react';
-// import "../assets/style/Timer.css";
+import "../assets/style/Timer.css";
 import easyGames from '../puzzles/easy_sudoku.json';
 import medGames from '../puzzles/medium_sudoku.json';
 import hardGames from '../puzzles/hard_sudoku.json';
