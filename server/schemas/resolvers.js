@@ -1,11 +1,17 @@
-const { User, Thought } = require('../models');
+const { User, Thought, GameStat } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     me: async () => {
-      return User.find().populate('thoughts');
+      return User.find().populate('GameStat');
     },
+    GameStats: async () => {
+      return GameStat.find();
+    },
+    GameStat: async (parent, { gameStatId }) => {
+      return GameStat.findOne({ _id: gameStatId });
+    }
   },
 
   Mutation: {
@@ -31,7 +37,18 @@ const resolvers = {
 
       return { token, user };
     },
-    
+    addGameStat: async (parent, { gameStatId, gameStat}) => {
+      return GameStat.findOneAndUpdate(
+        { _id: gameStatId },
+        {
+          $addToSet: { gameStat: { gameStat }}
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      )
+    }
   },
 };
 

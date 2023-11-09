@@ -4,21 +4,14 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
-
 function InstructionsModal() {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-
       <Button className="instructionsModal" onClick={handleShow}>
-
         How to Play      </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>How to Play</Modal.Title>
@@ -44,5 +37,4 @@ function InstructionsModal() {
     </>
   );
 }
-
 export default InstructionsModal;

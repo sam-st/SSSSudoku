@@ -3,7 +3,11 @@ import MyScoresModal from "../components/MyScoresModal";
 import LeaderBoardModal from "../components/LeaderBoardModal";
 import Button from 'react-bootstrap/Button';
 import "../assets/style/GameBoard.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import "../assets/style/Timer.css";
+import easyGames from '../puzzles/easy_sudoku.json';
+import medGames from '../puzzles/medium_sudoku.json';
+import hardGames from '../puzzles/hard_sudoku.json';
 
 const initial =
   [
@@ -17,12 +21,45 @@ const initial =
     [0, 4, 5, 0, 0, 0, 2, 0, 9],
     [0, 0, 0, 0, 3, 0, 0, 7, 0]
   ]
-export default function Game() {
-  const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
 
-  function getDeepCopy(arr) {
-    return JSON.parse(JSON.stringify(arr));
-  }
+  let gameArray = [];
+  
+  export default function Game() {
+    const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
+    
+    function getDeepCopy(arr) {
+      return JSON.parse(JSON.stringify(arr));
+    }
+    function easy() {
+      gameArray = (easyGames[Math.floor(Math.random() * easyGames.length)]);
+      console.log(gameArray.unsolved);
+      return gameArray.unsolved
+    }
+    function medium() {
+      gameArray = (medGames[Math.floor(Math.random() * medGames.length)]);
+      console.log(gameArray.unsolved);
+      return gameArray.unsolved
+    }
+    function hard() {
+      gameArray = (hardGames[Math.floor(Math.random() * hardGames.length)]);
+      console.log(gameArray.unsolved);
+      return gameArray.unsolved
+    }
+    
+    function onDifficultyChange(e){
+      
+      const difficultyLevel = e.target.value;
+      if (difficultyLevel === "easy"){
+        setSudokuArr(easy());
+      }
+      else if (difficultyLevel === "medium"){
+        setSudokuArr(medium());
+      }
+      else{
+        setSudokuArr(hard());
+      }
+    }
+
 
   function onInputChange(e, row, col) {
     var val = parseInt(e.target.value) || 0, grid = getDeepCopy(sudokuArr);
@@ -30,254 +67,112 @@ export default function Game() {
       grid[row][col] = val;
     }
   }
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  function toggle() {
+    setIsActive(!isActive);
+  }
+
+  function reset() {
+    setSeconds(0);
+    setIsActive(false);
+  }
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
+
   return (
-    <div>
+    <div className="background">
+
       <div className="text-center">
-        <div class="position-relative">
-          <div class="position-absolute top-0 end-0 mt-1">
-            <MyScoresModal />
-            <InstructionsModal />
-            <LeaderBoardModal />
-          </div>
-          <div class="position-absolute top-0 start-0 mt-1">
 
-            <label className="m-2" for="difficulty">Difficulty Level:</label>
-            <select name="difficulty" id="difficulty">
-              <option value="easy38">Easy</option>
-              <option value="medium26">Medium</option>
-              <option value="hard24">Hard</option>
-            </select>
-          </div>
-          <h1 className="mt-4">Sudoku Puzzle</h1>
-        </div>
-        <div >
-
-          
-          <div class="position-relative">
-            <table className="position-absolute" width="85%"  border="2">
-
-              <tr class="border border-primary">
-                <td className="border border-primary>">3</td>
-                <td className="border border-primary>">9</td>
-                <td className="border border-primary>">8</td>
-                {/* <!-- empty cells filled with non-breaking spaces to give more whitespace --> */}
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;&nbsp;</td>
-              </tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">2</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">8</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">3</td>
-                <td className="border border-primary>">5</td>
-                <td className="border border-primary>">9</td>
-              </tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">1</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">4</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-              </tr>
-              <tr>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-
-              </tr>
-              <tr class="border border-primary"></tr>
-              <tr class="border border-primary"></tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">4</td>
-                <td className="border border-primary>">9</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">1</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-              </tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">8</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">6</td>
-                <td className="border border-primary>">9</td>
-                <td className="border border-primary>">5</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">4</td>
-              </tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">4</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">5</td>
-                <td className="border border-primary>">9</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-              </tr>
-              <tr>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-                <td className="bg-secondary"></td>
-
-              </tr>
-              <tr class="border border-primary"></tr>
-              <tr class="border border-primary"></tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">5</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">3</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-              </tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">7</td>
-                <td className="border border-primary>">8</td>
-                <td className="border border-primary>">6</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">2</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">1</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-              </tr>
-              <tr class="border border-primary">
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="border border-primary>">&nbsp;&nbsp;</td>
-                <td className="bg-secondary"></td>
-                <td className="border border-primary>">7</td>
-                <td className="border border-primary>">8</td>
-                <td className="border border-primary>">2</td>
-              </tr>
-            </table>
-            
-
-            <div class="position-absolute top-0 end-0">
-        <Button className="btn btn-primary-lg">Verify</Button>
-        <Button className="btn btn-primary-lg">Try Again</Button>
-        <h4>Login to Save:</h4>
-        <Button className="btn btn-primary-lg">Login</Button>
       </div>
-</div>
-          </div>
-        </div>
-      </div>
-        
-          {/* <h1 className="mt-4">Sudoku Puzzle</h1> */}
-        </div>
-        <div >
-          <div class="position-relative">
-            <div className="game">
-              <div class="position-relative">
-          <div class="modalButtons position-absolute top-0 end-0">
-            <MyScoresModal/>
-            <InstructionsModal />
-            <LeaderBoardModal />
-          </div>
-          </div>
-          <div class="position-absolute top-0 start-0">
-<button className="level">
-
-            <label className="mx-2" for="difficulty">Difficulty Level:</label>
-            <select className="choices" name="difficulty" id="difficulty">
-              <option className="choices" value="easy38">Easy</option>
-              <option className="choices" value="medium26">Medium</option>
-              <option className="choices" value="hard24">Hard</option>
-            </select>
-</button>
-<div className="signInContainer">
-  <button className="signInArea">
-
-<h6 className="signInToSave">Sign in to save scores!</h6>
-<button className="signIn">Sign In</button>
-  </button>
-</div>
-          </div>
-              <div className="game-header">
-                <h3>Sudoku</h3>
-                <table>
-                  <tbody>
-                    {
-                      [0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
-                        return <tr key={rIndex} className={(row + 1) % 3 === 0 ? "bBorder" : ''}>
-                          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
-                            return <td key={rIndex + cIndex} className={(col + 1) % 3 === 0 ? "rBorder" : ''}>
-                              <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === 0 ? '' : sudokuArr[row][col]} className="cell-input" disabled={initial[row][col] != 0} />
-                            </td>
-                          })}
-
-                        </tr>
-                      })
-                    }
-                  </tbody>
-                </table>
-                <div className="buttonContainer">
-                  <button className="checkButton">Check</button>
-                  <button className="solveButton">Solve</button>
-                  <button className="resetButton">Reset</button>
-
-                </div>
+      <div >
+        <div className="position-relative">
+          <div className="game">
+            <div className="position-relative">
+              <div className="modalButtons position-absolute top-0 end-0">
+                <MyScoresModal />
+                <InstructionsModal />
+                <LeaderBoardModal />
               </div>
             </div>
-                    </div>
+            <div className="position-absolute top-0 start-0">
+              <button className="level">
+
+                <label className="mx-2" for="difficulty">Difficulty Level:</label>
+                <select className="choices" onChange={(e) => onDifficultyChange(e)}name="difficulty" id="difficulty">
+                  <option className="choices"  value="easy">Easy</option>
+                  <option className="choices" value="medium">Medium</option>
+                  <option className="choices" value="hard">Hard</option>
+
+                </select>
+              </button>
+              <div className="signInContainer">
+                <button className="signInArea">
+
+                  <h6 className="signInToSave">Sign in to save scores!</h6>
+                  <button className="signIn">Sign In</button>
+                </button>
+              </div>
+            </div>
+            <div className="game-header">
+              <h3>Sudoku</h3>
+              <table>
+                <tbody>
+                  {
+                    [0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
+                      return <tr key={rIndex} className={(row + 1) % 3 === 0 ? "bBorder" : ''}>
+                        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
+                          return <td key={rIndex + cIndex} className={(col + 1) % 3 === 0 ? "rBorder" : ''}>
+                            <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === 0 ? '' : sudokuArr[row][col]} className="cell-input" disabled={initial[row][col] != 0} />
+                          </td>
+                        })}
+
+                      </tr>
+                    })
+                  }
+                </tbody>
+              </table>
+              <div className="buttonContainer">
+                <button className="checkButton">Check</button>
+                <button className="solveButton">Solve</button>
+                <button className="resetButton">Reset</button>
+
+              </div>
+              <div className="timerContainer  position-absolute top-50 start-0">
+                <div className="app">
+                  <div className="time position">
+                    {seconds}s
+                  </div>
+                  <div className="row">
+                    <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
+                      {isActive ? 'Pause' : 'Start'}
+                    </button>
+                    <button className="button" onClick={reset}>
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+
+
   )
 }
+

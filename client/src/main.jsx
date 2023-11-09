@@ -16,9 +16,9 @@ import App from './App';
 import Error from './pages/Error';
 import Game from './pages/GameBoard';
 import Home from './pages/Home';
-import Instructions from './pages/Instructions';
-import Login from './pages/Login';
+import Login from './pages/Login'
 import Auth from './utils/auth';
+import Instructions from './components/Instructions';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -42,7 +42,6 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-import Instructions from './components/Instructions';
 
 
 ReactDOM.render(
