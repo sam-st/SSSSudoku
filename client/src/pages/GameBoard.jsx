@@ -22,6 +22,7 @@ let randomIndex = 0;
 let solvedArray = [];
 let unsolvedArray = [];
 let usergrid = [];
+let level = '';
 
 const initial =
   [
@@ -67,7 +68,6 @@ export default function Game() {
       setSudokuArr(easy());
       solvedArray = easyGames[randomIndex].solved
       unsolvedArray = easyGames[randomIndex].unsolved
-
     }
     else if (difficultyLevel === "medium") {
       setSudokuArr(medium());
@@ -79,10 +79,11 @@ export default function Game() {
       solvedArray = hardGames[randomIndex].solved
       unsolvedArray = hardGames[randomIndex].unsolved
     }
+    return difficultyLevel
   }
 
   function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
-    console.log(randomIndex);
+    // console.log(randomIndex);
     setSudokuArr(unsolvedArray);
   }
 
@@ -95,47 +96,70 @@ export default function Game() {
     usergrid = grid;
     console.log(usergrid);
   }
+function calculateScore(level){
+  console.log(level);
+  }
+
+  function difficultyLevelRecorded(e) {
+    let level = e.target.value;
+    // console.log(level);
+    calculateScore(level);
+    if (level === 'easy') {
+      return easy
+    }
+    else if (level === 'medium') {
+      return medium
+    }
+    else {
+      return hard
+    }
+  }
+
+  function handleOnClick(e) {
+    difficultyLevelRecorded(e)
+    onDifficultyChange(e)
+  }
 
   function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
-    console.log(solvedArray);
-    console.log(`${minutes}:${seconds}`);
-
+    // console.log(solvedArray);
+    // console.log(level);
+    // console.log(`${minutes}:${seconds}`);
+    let score = 1800 - ((minutes * 60) + seconds);
+    console.log(score);
     for (let x = 0; x < solvedArray.length; x++) {
       for (let y = 0; y < usergrid.length; y++) {
         if (solvedArray[x][y] !== usergrid[x][y]) {
-          alert('bad');
+          alert(`Success! You scored: ${score}`);
           return false;
         }
       }
     }
-    alert('good');
+    alert(`Success! You scored: ${score}`);
     return true;
   }
- 
+
   function MyStopwatch() {
     const {
-      totalSeconds,
       seconds,
       minutes,
       isRunning,
       start,
       pause,
-      reset,
     } = useStopwatch({ autoStart: true });
     return (
       <div style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: '50px' }}>
+        <div style={{ fontSize: '40px' }}>
           <h4>
             <span>{minutes}</span> minutes <span>{seconds}</span> seconds
-            </h4>
+          </h4>
         </div>
         <button className="level">
-          <label className="mx-2" for="difficulty">Difficulty Level:</label>
-          <select className="choices" onClick={start} onChange={(e) => onDifficultyChange(e, { start})} name="difficulty" id="difficulty">
+          <label className="mx-1" for="difficulty">Difficulty Level:</label>
+          <select className="choices" onChange={(e) => handleOnClick(e, { start })} name="difficulty" id="difficulty">
             <option className='choices' value='null'></option>
-            <option onChange={ start } className="choices" value="easy">Easy</option>
-            <option onChange={start} className="choices" value="medium">Medium</option>
-            <option onChange={start} className="choices" value="hard">Hard</option>
+            <option className="choices" value="easy">Easy</option>
+            <option className="choices" value="medium">Medium</option>
+            <option className="choices" value="hard">Hard</option>
           </select>
         </button>
         <button className="level" onClick={(e) => checkSudoku({ seconds }, { minutes }, solvedArray, usergrid, { pause })}>Finished</button>
@@ -145,7 +169,7 @@ export default function Game() {
   }
   return (
     <div className="background">
-           <div >
+      <div >
         <div className="position-relative">
           <div className="game">
             <div className="position-relative">
@@ -156,7 +180,7 @@ export default function Game() {
               </div>
             </div>
             <div className="position-absolute top-0 start-0">
-                        <div className="signInContainer">
+              <div className="signInContainer">
                 <button className="signInArea mt-2">
 
                   <h6 className="signInToSave">Sign in to save scores!</h6>
@@ -165,7 +189,7 @@ export default function Game() {
               </div>
             </div>
             <div className="game-header">
-              <h3 className='mt-3'>Sudoku</h3>
+              <h3 className='mt-2'>Sudoku</h3>
               <table>
                 <tbody>
                   {
@@ -184,10 +208,8 @@ export default function Game() {
               </table>
               <div className="buttonContainer">
                 <div>
-        <MyStopwatch />
-      </div>
-                {/* <button className="checkButton" onClick={() => checkSudoku(solvedArray, usergrid)}>Check</button>
-                <button className="resetButton" onClick={resetSudoku}>Reset</button> */}
+                  <MyStopwatch />
+                </div>
               </div>
             </div>
           </div>
