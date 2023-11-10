@@ -20,6 +20,9 @@ import React from "react";
 let solvedArray = [];
 let unsolvedArray = [];
 let usergrid = [];
+let gameArray = [];
+let initArr = [];
+let randomIndex;
 
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -32,10 +35,6 @@ const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
 ];
-
-let gameArray = [];
-let initArr = [];
-let randomIndex;
 
 export default function Game() {
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
@@ -69,28 +68,60 @@ export default function Game() {
     const difficultyLevel = e.target.value;
     if (difficultyLevel === "easy") {
       setSudokuArr(easy());
+      solvedArray = easyGames[randomIndex].solved;
+      unsolvedArray = easyGames[randomIndex].unsolved;
     } else if (difficultyLevel === "medium") {
       setSudokuArr(medium());
+      solvedArray = medGames[randomIndex].solved;
+      unsolvedArray = medGames[randomIndex].unsolved;
     } else {
       setSudokuArr(hard());
+      solvedArray = hardGames[randomIndex].solved;
+      unsolvedArray = hardGames[randomIndex].unsolved;
     }
+    return difficultyLevel;
   }
-  
+
+  function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
+    //console.log(randomIndex);
+    setSudokuArr(unsolvedArray);
+  }
+
   function onInputChange(e, row, col, grid) {
     var val = parseInt(e.target.value) || -1,
-    grid = getDeepCopy(sudokuArr);
+      grid = getDeepCopy(sudokuArr);
     if (val === -1 || (val >= 1 && val <= 9)) {
       grid[row][col] = val;
     }
-    
-    
+
     setSudokuArr(grid);
     usergrid = grid;
   }
-  
-  function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
-    console.log(randomIndex);
-    setSudokuArr(unsolvedArray);
+
+  function calculateScore(level) {
+    console.log(level);
+  }
+
+  function calculateScore(level) {
+    console.log(level);
+  }
+
+  function handleOnClick(e) {
+    difficultyLevelRecorded(e);
+    onDifficultyChange(e);
+  }
+
+  function difficultyLevelRecorded(e) {
+    let level = e.target.value;
+    // console.log(level);
+    calculateScore(level);
+    if (level === "easy") {
+      return easy;
+    } else if (level === "medium") {
+      return medium;
+    } else {
+      return hard;
+    }
   }
 
   function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
@@ -111,6 +142,58 @@ export default function Game() {
     return true;
   }
 
+  function MyStopwatch() {
+    const { seconds, minutes, isRunning, start, pause } = useStopwatch({
+      autoStart: true,
+    });
+    return (
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: "40px" }}>
+          <h4>
+            <span>{minutes}</span> minutes <span>{seconds}</span> seconds
+          </h4>
+        </div>
+        <button className="level">
+          <label className="mx-1" for="difficulty">
+            Difficulty Level:
+          </label>
+          <select
+            className="choices"
+            onChange={(e) => handleOnClick(e, { start })}
+            name="difficulty"
+            id="difficulty"
+          >
+            <option className="choices" value="null"></option>
+            <option className="choices" value="easy">
+              Easy
+            </option>
+            <option className="choices" value="medium">
+              Medium
+            </option>
+            <option className="choices" value="hard">
+              Hard
+            </option>
+          </select>
+        </button>
+        <button
+          className="level"
+          onClick={(e) =>
+            checkSudoku({ seconds }, { minutes }, solvedArray, usergrid, {
+              pause,
+            })
+          }
+        >
+          Finished
+        </button>
+        <button
+          className="level"
+          onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)}
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="background">
       <div>
@@ -124,26 +207,15 @@ export default function Game() {
               </div>
             </div>
             <div className="position-absolute top-0 start-0">
-              <button className="level">
-
-                <label className="mx-2" for="difficulty">Difficulty Level:</label>
-                <select className="choices" onChange={(e) => onDifficultyChange(e)}name="difficulty" id="difficulty">
-                  <option className="choices"  value="easy">Easy</option>
-                  <option className="choices" value="medium">Medium</option>
-                  <option className="choices" value="hard">Hard</option>
-
-                </select>
-              </button>
               <div className="signInContainer">
-                <button className="signInArea">
-
+                <button className="signInArea mt-2">
                   <h6 className="signInToSave">Sign in to save scores!</h6>
                   <button className="signIn">Sign In</button>
                 </button>
               </div>
             </div>
             <div className="game-header">
-              <h3 className="mt-3">Sudoku</h3>
+              <h3 className="mt-2">Sudoku</h3>
               <table>
                 <tbody>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
@@ -156,7 +228,7 @@ export default function Game() {
                           return (
                             <td
                               key={rIndex + cIndex}
-                              className={(col + 1) % 3 === 0 ? "rBorder" : ""}
+                              className={(col + 1) % 3 === -1 ? "rBorder" : ""}
                             >
                               <input
                                 onChange={(e) => onInputChange(e, row, col)}
@@ -167,7 +239,7 @@ export default function Game() {
                                 }
                                 className="cell-input"
                                 disabled={
-                                  sudokuArr[row][col] != -1 &&
+                                  sudokuArr[row][col] !== -1 &&
                                   initArr[row][col] === sudokuArr[row][col]
                                 }
                               />
@@ -180,9 +252,9 @@ export default function Game() {
                 </tbody>
               </table>
               <div className="buttonContainer">
-                <div>{/* <MyStopwatch /> */}</div>
-                {/* <button className="checkButton" onClick={() => checkSudoku(solvedArray, usergrid)}>Check</button>
-                <button className="resetButton" onClick={resetSudoku}>Reset</button> */}
+                <div>
+                  <MyStopwatch />
+                </div>
               </div>
             </div>
           </div>
