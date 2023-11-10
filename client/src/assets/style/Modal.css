@@ -1,0 +1,40 @@
+.scoresModal{
+    background-color: azure;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    color:black;
+    /* margin: 0px 20px; */
+}
+
+.leaderModal{
+  background-color: tomato;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color:black;
+  /* margin: 0px 20px; */
+}
+
+.instructionsModal{
+  background-color: orange;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color:black;
+  margin: 0px 5px;
+}
+
+.myTable{
+  text-align: center;
+}
+
+.title{
+  text-align: center;
+}

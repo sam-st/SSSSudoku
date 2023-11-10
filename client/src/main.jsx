@@ -1,44 +1,77 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 
-import ReactDOM from 'react-dom/client'
-// Bringing in the required imports from 'react-router-dom' to set up application routing behavior
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
 import Error from './pages/Error';
 import Game from './pages/GameBoard';
+import Difficulty from './pages/DifficultyLevel';
+
 import Home from './pages/Home';
-import Instructions from './pages/Instructions';
+import Login from './pages/Login'
+import Auth from './utils/auth';
+import Instructions from './components/Instructions';
 
-// Define the accessible routes, and which components respond to which URL
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <Error />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: '/Game',
-        element: <Game />,
-      },
-      // {
-      //   path: '/Login',
-      //   element: <Login />,
-      // },
-      {
-        path: '/Instructions',
-        element: <Instructions />,
-      },
-    ],
-  },
-]);
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+
+ReactDOM.render(
+  <React.StrictMode>
+     <ApolloProvider client={client}>
+    <Router>
+      <App />
+      {Auth.loggedIn() ? (
+        <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/difficulty" element={<Difficulty />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/instructions" element={<Instructions />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      ) : (
+        <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/difficulty" element={<Difficulty />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/instructions" element={<Instructions />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+      )}
+     
+    </Router>
+    </ApolloProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
