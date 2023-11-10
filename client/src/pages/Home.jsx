@@ -105,7 +105,7 @@ export default function Game() {
               <a href="/Login" className="btn" style={button2Style}>
                 Login
               </a>
-              <a href="/Difficulty" className="btn" style={button3Style}>
+              <a href="/Game" className="btn" style={button3Style}>
                 Play
               </a>
             </div>
@@ -115,8 +115,8 @@ export default function Game() {
           </div>
         </div>
       </div>
-      <div class="wrap">
-        <svg class="svg">
+      <div className="wrap">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -128,7 +128,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -140,7 +140,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -152,7 +152,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -164,7 +164,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -176,7 +176,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -188,7 +188,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -200,7 +200,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -212,7 +212,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"

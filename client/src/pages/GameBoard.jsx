@@ -1,6 +1,8 @@
 import InstructionsModal from "../components/InstructionsModal";
 import MyScoresModal from "../components/MyScoresModal";
 import LeaderBoardModal from "../components/LeaderBoardModal";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import Success from '../components/Success';
 import Button from 'react-bootstrap/Button';
 import "../assets/style/GameBoard.css";
@@ -12,6 +14,9 @@ import hardGames from '../puzzles/hard_sudoku.json';
 import difficulty from "../pages/DifficultyLevel";
 import { useLocation } from 'react-router-dom';
 import { Alert } from "react-bootstrap";
+import React from 'react';
+import { useStopwatch } from 'react-timer-hook';
+
 let gameArray = [];
 let randomIndex = 0;
 let solvedArray = [];
@@ -20,20 +25,18 @@ let usergrid = [];
 
 const initial =
   [
-    [-1, 5, -1, 9, -1, -1, -1, -1, -1],
-    [8, -1, -1, -1, 4, -1, 3, -1, 7],
-    [-1, -1, -1, 2, 8, -1, 1, 9, -1],
-    [5, 3, 8, 6, -1, 7, 9, 4, -1],
-    [-1, 2, -1, 3, -1, 1, -1, -1, -1],
-    [1, -1, 9, 8, -1, 4, 6, 2, 3],
-    [9, -1, 7, 4, -1, -1, -1, -1, -1],
-    [-1, 4, 5, -1, -1, -1, 2, -1, 9],
-    [-1, -1, -1, -1, 3, -1, -1, 7, -1]
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
   ]
 
-
 export default function Game() {
-
 
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
 
@@ -42,6 +45,7 @@ export default function Game() {
   }
   function easy() {
     randomIndex = Math.floor(Math.random() * easyGames.length);
+    console.log(randomIndex);
     gameArray = easyGames[randomIndex];
     return gameArray.unsolved
   }
@@ -62,7 +66,6 @@ export default function Game() {
     if (difficultyLevel === "easy") {
       setSudokuArr(easy());
       solvedArray = easyGames[randomIndex].solved
-      console.log(solvedArray);
       unsolvedArray = easyGames[randomIndex].unsolved
 
     }
@@ -78,10 +81,10 @@ export default function Game() {
     }
   }
 
-  function resetSudoku() {
-
+  function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
+    console.log(randomIndex);
+    setSudokuArr(unsolvedArray);
   }
-
 
   function onInputChange(e, row, col, grid) {
     var val = parseInt(e.target.value) || -1, grid = getDeepCopy(sudokuArr);
@@ -93,7 +96,10 @@ export default function Game() {
     console.log(usergrid);
   }
 
-  function checkSudoku(solvedArray, usergrid) {
+  function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
+    console.log(solvedArray);
+    console.log(`${minutes}:${seconds}`);
+
     for (let x = 0; x < solvedArray.length; x++) {
       for (let y = 0; y < usergrid.length; y++) {
         if (solvedArray[x][y] !== usergrid[x][y]) {
@@ -102,41 +108,44 @@ export default function Game() {
         }
       }
     }
-
     alert('good');
     return true;
   }
-
-
-
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-
-  function toggle() {
-    setIsActive(!isActive);
+ 
+  function MyStopwatch() {
+    const {
+      totalSeconds,
+      seconds,
+      minutes,
+      isRunning,
+      start,
+      pause,
+      reset,
+    } = useStopwatch({ autoStart: true });
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ fontSize: '50px' }}>
+          <h4>
+            <span>{minutes}</span> minutes <span>{seconds}</span> seconds
+            </h4>
+        </div>
+        <button className="level">
+          <label className="mx-2" for="difficulty">Difficulty Level:</label>
+          <select className="choices" onClick={start} onChange={(e) => onDifficultyChange(e, { start})} name="difficulty" id="difficulty">
+            <option className='choices' value='null'></option>
+            <option onChange={ start } className="choices" value="easy">Easy</option>
+            <option onChange={start} className="choices" value="medium">Medium</option>
+            <option onChange={start} className="choices" value="hard">Hard</option>
+          </select>
+        </button>
+        <button className="level" onClick={(e) => checkSudoku({ seconds }, { minutes }, solvedArray, usergrid, { pause })}>Finished</button>
+        <button className="level" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)}>Try Again</button>
+      </div>
+    );
   }
-
-  function reset() {
-    setSeconds(0);
-    setIsActive(false);
-  }
-
-  useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isActive, seconds]);
-
-
   return (
     <div className="background">
-      <div >
+           <div >
         <div className="position-relative">
           <div className="game">
             <div className="position-relative">
@@ -147,18 +156,8 @@ export default function Game() {
               </div>
             </div>
             <div className="position-absolute top-0 start-0">
-              <button className="level">
-
-                <label className="mx-2" for="difficulty">Difficulty Level:</label>
-                <select className="choices" onChange={(e) => onDifficultyChange(e)} name="difficulty" id="difficulty">
-                  <option className="choices" value="easy">Easy</option>
-                  <option className="choices" value="medium">Medium</option>
-                  <option className="choices" value="hard">Hard</option>
-
-                // </select>
-              </button>
-              <div className="signInContainer">
-                <button className="signInArea">
+                        <div className="signInContainer">
+                <button className="signInArea mt-2">
 
                   <h6 className="signInToSave">Sign in to save scores!</h6>
                   <button className="signIn">Sign In</button>
@@ -166,7 +165,7 @@ export default function Game() {
               </div>
             </div>
             <div className="game-header">
-              <h3>Sudoku</h3>
+              <h3 className='mt-3'>Sudoku</h3>
               <table>
                 <tbody>
                   {
@@ -184,27 +183,12 @@ export default function Game() {
                 </tbody>
               </table>
               <div className="buttonContainer">
-                <button className="checkButton" onClick={() => checkSudoku(solvedArray, usergrid)}>Check</button>
-                {/* <button className="solveButton" onClick={solveSudoku}>Solve</button> */}
-                <button className="resetButton" onClick={resetSudoku}>Reset</button>
-
+                <div>
+        <MyStopwatch />
+      </div>
+                {/* <button className="checkButton" onClick={() => checkSudoku(solvedArray, usergrid)}>Check</button>
+                <button className="resetButton" onClick={resetSudoku}>Reset</button> */}
               </div>
-              <div className="timerContainer  position-absolute top-50 start-0">
-                <div className="app">
-                  <div className="time position">
-                    {seconds}s
-                  </div>
-                  <div className="row">
-                    <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
-                      {isActive ? 'Pause' : 'Start'}
-                    </button>
-                    <button className="button" onClick={reset}>
-                      Reset
-                    </button>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -214,4 +198,3 @@ export default function Game() {
 
   );
 }
-
