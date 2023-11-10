@@ -11,19 +11,21 @@ import hardGames from '../puzzles/hard_sudoku.json';
 
 const initial =
   [
-    [0, 5, 0, 9, 0, 0, 0, 0, 0],
-    [8, 0, 0, 0, 4, 0, 3, 0, 7],
-    [0, 0, 0, 2, 8, 0, 1, 9, 0],
-    [5, 3, 8, 6, 0, 7, 9, 4, 0],
-    [0, 2, 0, 3, 0, 1, 0, 0, 0],
-    [1, 0, 9, 8, 0, 4, 6, 2, 3],
-    [9, 0, 7, 4, 0, 0, 0, 0, 0],
-    [0, 4, 5, 0, 0, 0, 2, 0, 9],
-    [0, 0, 0, 0, 3, 0, 0, 7, 0]
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1]
   ]
 
   let gameArray = [];
-  
+  let initArr = [];
+  let randomIndex;
+
   export default function Game() {
     const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
     
@@ -31,18 +33,21 @@ const initial =
       return JSON.parse(JSON.stringify(arr));
     }
     function easy() {
-      gameArray = (easyGames[Math.floor(Math.random() * easyGames.length)]);
-      console.log(gameArray.unsolved);
+      randomIndex = Math.floor(Math.random() * easyGames.length)
+      gameArray = (easyGames[randomIndex]);
+      initArr = (easyGames[randomIndex].unsolved);
       return gameArray.unsolved
     }
     function medium() {
-      gameArray = (medGames[Math.floor(Math.random() * medGames.length)]);
-      console.log(gameArray.unsolved);
+      randomIndex = Math.floor(Math.random() * medGames.length)
+      gameArray = (medGames[randomIndex]);
+      initArr = (medGames[randomIndex].unsolved);
       return gameArray.unsolved
     }
     function hard() {
-      gameArray = (hardGames[Math.floor(Math.random() * hardGames.length)]);
-      console.log(gameArray.unsolved);
+      randomIndex = Math.floor(Math.random() * hardGames.length)
+      gameArray = (hardGames[randomIndex]);
+      initArr = (hardGames[randomIndex].unsolved);
       return gameArray.unsolved
     }
     
@@ -61,12 +66,21 @@ const initial =
     }
 
 
-  function onInputChange(e, row, col) {
-    var val = parseInt(e.target.value) || 0, grid = getDeepCopy(sudokuArr);
-    if (val === 0 || val >= 1 && val <= 9) {
-      grid[row][col] = val;
+    function onInputChange(e, row, col) {
+      console.log(`Changed value at (${row}, ${col}): ${e.target.value}`);
+      let val = parseInt(e.target.value) || 0;
+      let grid = getDeepCopy(sudokuArr);
+    
+      if (val === 0 || (val >= 1 && val <= 9)) {
+        grid[row][col] = val;
+      }
+    
+      // Update the state
+      setSudokuArr(grid);
+
+      console.log(initArr);
     }
-  }
+
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
@@ -135,7 +149,7 @@ const initial =
                       return <tr key={rIndex} className={(row + 1) % 3 === 0 ? "bBorder" : ''}>
                         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
                           return <td key={rIndex + cIndex} className={(col + 1) % 3 === 0 ? "rBorder" : ''}>
-                            <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === 0 ? '' : sudokuArr[row][col]} className="cell-input" disabled={initial[row][col] != 0} />
+                            <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === -1 ? '' : sudokuArr[row][col]} className="cell-input" disabled={sudokuArr[row][col] != -1 && initArr[row][col] === sudokuArr[row][col]} />
                           </td>
                         })}
 
@@ -148,31 +162,11 @@ const initial =
                 <button className="checkButton">Check</button>
                 <button className="solveButton">Solve</button>
                 <button className="resetButton">Reset</button>
-
               </div>
-              <div className="timerContainer  position-absolute top-50 start-0">
-                <div className="app">
-                  <div className="time position">
-                    {seconds}s
-                  </div>
-                  <div className="row">
-                    <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
-                      {isActive ? 'Pause' : 'Start'}
-                    </button>
-                    <button className="button" onClick={reset}>
-                      Reset
-                    </button>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
   )
 }
-
