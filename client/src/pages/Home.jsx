@@ -105,7 +105,7 @@ export default function Game() {
               <a href="/Login" className="btn" style={button2Style}>
                 Login
               </a>
-              <a href="/Difficulty" className="btn" style={button3Style}>
+              <a href="/Game" className="btn" style={button3Style}>
                 Play
               </a>
             </div>
