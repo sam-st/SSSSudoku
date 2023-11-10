@@ -1,16 +1,17 @@
-const { User, Thought, GameStats } = require('../models');
+const { User, Thought, GameStat } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     me: async () => {
-      return User.find().populate('thoughts');
+      return User.find({});
     },
-    GameStats: async () => {
-      return GameStats.find();
+    GameStats: async (parent, { _id }) => {
+      const params = _id ? { _id } : {};
+      return GameStat.find(params);
     },
     GameStat: async (parent, { gameStatId }) => {
-      return GameStats.findOne({ _id: gameStatId });
+      return GameStat.findOne({ _id: gameStatId });
     }
   },
 
@@ -37,17 +38,23 @@ const resolvers = {
 
       return { token, user };
     },
-    addStat: async (parent, { gameStatId, gameStats}) => {
-      return GameStats.findOneAndUpdate(
-        { _id: gameStatId },
-        {
-          $addToSet: { gameStats: { gameStats }}
-        },
+    addGameStat: async (parent, { gameStatId, gameStat }) => {
+      const stat = await GameStat.findOneAndUpdate(
+        { _id },
+        { $addToSet: { gameStat: { gameStatId } } },
         {
           new: true,
           runValidators: true,
         }
-      )
+      );
+      return stat;
+      // return GameStat.findOneAndUpdate(
+      //   { _id: gameStatId },
+      //   {
+      //     $addToSet: { gameStat: { gameStat }}
+      //   },
+
+      // )
     }
   },
 };

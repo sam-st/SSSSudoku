@@ -25,6 +25,12 @@ const userSchema = new Schema({
       ref: 'Thought',
     },
   ],
+  gameStat: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'GameStat',
+    }
+  ]
 });
 
 userSchema.pre('save', async function (next) {
