@@ -23,6 +23,7 @@ let solvedArray = [];
 let unsolvedArray = [];
 let usergrid = [];
 
+
 const initial =
   [
     [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -33,116 +34,87 @@ const initial =
     [-1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1]
   ]
 
-export default function Game() {
+  
+        
 
-  const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
+  let gameArray = [];
+  let initArr = [];
+  let randomIndex;
 
-  function getDeepCopy(arr) {
-    return JSON.parse(JSON.stringify(arr));
-  }
-  function easy() {
-    randomIndex = Math.floor(Math.random() * easyGames.length);
-    console.log(randomIndex);
-    gameArray = easyGames[randomIndex];
-    return gameArray.unsolved
-  }
-
-  function medium() {
-    randomIndex = Math.floor(Math.random() * medGames.length);
-    gameArray = medGames[randomIndex];
-    return gameArray.unsolved
-  }
-  function hard() {
-    randomIndex = Math.floor(Math.random() * hardGames.length);
-    gameArray = hardGames[randomIndex];
-    return gameArray.unsolved
-  }
-
-  function onDifficultyChange(e) {
-    const difficultyLevel = e.target.value;
-    if (difficultyLevel === "easy") {
-      setSudokuArr(easy());
-      solvedArray = easyGames[randomIndex].solved
-      unsolvedArray = easyGames[randomIndex].unsolved
-
+  export default function Game() {
+    const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
+    
+    function getDeepCopy(arr) {
+      return JSON.parse(JSON.stringify(arr));
     }
-    else if (difficultyLevel === "medium") {
-      setSudokuArr(medium());
-      solvedArray = medGames[randomIndex].solved
-      unsolvedArray = medGames[randomIndex].unsolved
+    function easy() {
+      randomIndex = Math.floor(Math.random() * easyGames.length)
+      gameArray = (easyGames[randomIndex]);
+      initArr = (easyGames[randomIndex].unsolved);
+      return gameArray.unsolved
     }
-    else {
-      setSudokuArr(hard());
-      solvedArray = hardGames[randomIndex].solved
-      unsolvedArray = hardGames[randomIndex].unsolved
+    function medium() {
+      randomIndex = Math.floor(Math.random() * medGames.length)
+      gameArray = (medGames[randomIndex]);
+      initArr = (medGames[randomIndex].unsolved);
+      return gameArray.unsolved
     }
-  }
-
-  function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
-    console.log(randomIndex);
-    setSudokuArr(unsolvedArray);
-  }
-
-  function onInputChange(e, row, col, grid) {
-    var val = parseInt(e.target.value) || -1, grid = getDeepCopy(sudokuArr);
-    if (val === -1 || val >= 1 && val <= 9) {
-      grid[row][col] = val;
+    function hard() {
+      randomIndex = Math.floor(Math.random() * hardGames.length)
+      gameArray = (hardGames[randomIndex]);
+      initArr = (hardGames[randomIndex].unsolved);
+      return gameArray.unsolved
     }
-    setSudokuArr(grid);
-    usergrid = grid;
-    console.log(usergrid);
-  }
-
-  function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
-    console.log(solvedArray);
-    console.log(`${minutes}:${seconds}`);
-
-    for (let x = 0; x < solvedArray.length; x++) {
-      for (let y = 0; y < usergrid.length; y++) {
-        if (solvedArray[x][y] !== usergrid[x][y]) {
-          alert('bad');
-          return false;
-        }
+    
+    function onDifficultyChange(e){
+      
+      const difficultyLevel = e.target.value;
+      if (difficultyLevel === "easy"){
+        setSudokuArr(easy());
+      }
+      else if (difficultyLevel === "medium"){
+        setSudokuArr(medium());
+      }
+      else{
+        setSudokuArr(hard());
       }
     }
-    alert('good');
-    return true;
-  }
- 
-  function MyStopwatch() {
-    const {
-      totalSeconds,
-      seconds,
-      minutes,
-      isRunning,
-      start,
-      pause,
-      reset,
-    } = useStopwatch({ autoStart: true });
-    return (
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: '50px' }}>
-          <h4>
-            <span>{minutes}</span> minutes <span>{seconds}</span> seconds
-            </h4>
-        </div>
-        <button className="level">
-          <label className="mx-2" for="difficulty">Difficulty Level:</label>
-          <select className="choices" onClick={start} onChange={(e) => onDifficultyChange(e, { start})} name="difficulty" id="difficulty">
-            <option className='choices' value='null'></option>
-            <option onChange={ start } className="choices" value="easy">Easy</option>
-            <option onChange={start} className="choices" value="medium">Medium</option>
-            <option onChange={start} className="choices" value="hard">Hard</option>
-          </select>
-        </button>
-        <button className="level" onClick={(e) => checkSudoku({ seconds }, { minutes }, solvedArray, usergrid, { pause })}>Finished</button>
-        <button className="level" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)}>Try Again</button>
-      </div>
-    );
-  }
+    
+    function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
+      console.log(randomIndex);
+      setSudokuArr(unsolvedArray);
+    }
+    function onInputChange(e, row, col, grid) {
+      var val = parseInt(e.target.value) || -1, grid = getDeepCopy(sudokuArr);
+      if (val === -1 || val >= 1 && val <= 9) {
+        grid[row][col] = val;
+      }
+    
+      setSudokuArr(grid);
+      usergrid = grid;
+      console.log(usergrid);
+    }
+      
+    function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
+      console.log(solvedArray);
+      // console.log(level);
+      console.log(`${minutes}:${seconds}`);
+      let score = 1800 - ((minutes * 60) + seconds);
+      console.log(score);
+      for (let x = 0; x < solvedArray.length; x++) {
+        for (let y = 0; y < usergrid.length; y++) {
+         if (solvedArray[x][y] !== usergrid[x][y]) {
+            alert(`Success! You scored: ${score}`);
+           return false;
+         }
+        }
+      }
+     alert(`Success! You scored: ${score}`);
+     return true;
+    }
   return (
     <div className="background">
            <div >
@@ -172,8 +144,8 @@ export default function Game() {
                     [0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
                       return <tr key={rIndex} className={(row + 1) % 3 === -1 ? "bBorder" : ''}>
                         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
-                          return <td key={rIndex + cIndex} className={(col + 1) % 3 === -1 ? "rBorder" : ''}>
-                            <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === -1 ? '' : sudokuArr[row][col]} className="cell-input" disabled={sudokuArr[row][col] !== -1} />
+                          return <td key={rIndex + cIndex} className={(col + 1) % 3 === 0 ? "rBorder" : ''}>
+                            <input onChange={(e) => onInputChange(e, row, col)} value={sudokuArr[row][col] === -1 ? '' : sudokuArr[row][col]} className="cell-input" disabled={sudokuArr[row][col] != -1 && initArr[row][col] === sudokuArr[row][col]} />
                           </td>
                         })}
 
@@ -194,7 +166,5 @@ export default function Game() {
         </div>
       </div>
     </div>
-
-
   );
 }
