@@ -15,7 +15,7 @@ import difficulty from "../pages/DifficultyLevel";
 // import { useLocation } from "react-router-dom";
 // import { Alert } from "react-bootstrap";
 import React from "react";
-// import { useStopwatch } from "react-timer-hook";
+import { useStopwatch } from "react-timer-hook";
 
 let solvedArray = [];
 let unsolvedArray = [];
@@ -210,7 +210,11 @@ export default function Game() {
               <div className="signInContainer">
                 <button className="signInArea mt-2">
                   <h6 className="signInToSave">Sign in to save scores!</h6>
-                  <button className="signIn">Sign In</button>
+                  <a href="/Login">
+                    <button className="signIn">Sign In</button>
+                  </a>
+                  <div>
+                  </div>
                 </button>
               </div>
             </div>
