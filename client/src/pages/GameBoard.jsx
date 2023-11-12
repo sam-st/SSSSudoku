@@ -23,8 +23,7 @@ let usergrid = [];
 let gameArray = [];
 let initArr = [];
 let randomIndex;
-let level;
-let difficultyLevel;
+let level = '';
 
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -66,8 +65,9 @@ export default function Game() {
     return gameArray.unsolved;
   }
 
-  function onDifficultyChange(level) {
-    if (level === "easy") {
+
+  function onDifficultyChange(difficultyLevel) {
+    if (difficultyLevel === "easy") {
       setSudokuArr(easy());
       solvedArray = easyGames[randomIndex].solved;
       unsolvedArray = easyGames[randomIndex].unsolved;
@@ -100,6 +100,11 @@ export default function Game() {
     usergrid = grid;
   }
 
+
+  function calculateScore(level) {
+    console.log(level);
+  }
+
   function calculateScore(level, score) {
     if (level === "easy") {
       return score;
@@ -119,6 +124,7 @@ export default function Game() {
     level = e.target.value;
     console.log(level);
 
+    // console.log(level);
     if (level === "easy") {
       return 'easy';
     } else if (level === "medium") {
