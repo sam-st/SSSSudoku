@@ -1,19 +1,23 @@
 const db = require('../config/connection');
-const { User, GameStat } = require('../models');
+const User = require('../models/User');
 const cleanDB = require('./cleanDB');
 
-const {userData, gameStatsData} = require('./userData');
+const userData = require('./userData');
 
 db.once('open', async () => {
-	try{
-	await cleanDB('User');
-	await User.insertMany(userData);
-	await GameStat.insertMany(gameStatsData);
+	try {
+		await cleanDB();
 
-	console.log('Users and Game Stats seeded!');
-	process.exit(0);
-} catch (error) {
-	console.error('Error seeding users:', error);
-	process.exit(1);
-}
+		const username = "master";
+		const email = "master@master.com";
+		const password = "masterpass";
+
+		await User.create({ username, email, password });
+
+		console.log('Users, Game Stats, and Thoughts are seeded!');
+		process.exit(0);
+	} catch (error) {
+		console.error('Error seeding users:', error);
+		process.exit(1);
+	}
 });

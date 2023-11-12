@@ -1,4 +1,5 @@
 const { User, Thought, GameStat } = require('../models');
+// const { findById } = require('../models/User');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -6,13 +7,14 @@ const resolvers = {
     me: async () => {
       return User.find({});
     },
-    GameStats: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return GameStat.find(params);
-    },
-    GameStat: async (parent, { gameStatId }) => {
-      return GameStat.findOne({ _id: gameStatId });
-    }
+    // getThought: async (thoughtId) => {
+    //   const thought = await Thought.findOne({
+    //     where: {
+    //       _id: thoughtId
+    //     }
+    //   });
+    //   return thought;
+    // }
   },
 
   Mutation: {
@@ -38,24 +40,26 @@ const resolvers = {
 
       return { token, user };
     },
-    addGameStat: async (parent, { gameStatId, gameStat }) => {
-      const stat = await GameStat.findOneAndUpdate(
-        { _id },
-        { $addToSet: { gameStat: { gameStatId } } },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-      return stat;
-      // return GameStat.findOneAndUpdate(
-      //   { _id: gameStatId },
-      //   {
-      //     $addToSet: { gameStat: { gameStat }}
-      //   },
-
-      // )
-    }
+    addGameStat: async (parent, { userId, score, difficulty }) => {
+      const user = await User.findById(userId);
+      if (!user) {
+        throw new Error(`Cant find User`)
+      } else {
+        user.gameStat.push({ score, createdAt: new Date().toISOString(), difficulty });
+        await user.save();
+        return user;
+      };
+    },
+    addThought: async (parent, { userId, thoughtText }) => {
+      const user = await User.findById(userId);
+      if (!user) {
+        throw new Error(`Cant find User`);
+      } else {
+        user.thoughts.push({ thoughtText, thoughtAuthor: userId, createdAt: new Date().toISOString() });
+        await user.save();
+        return user;
+      }
+    },
   },
 };
 
