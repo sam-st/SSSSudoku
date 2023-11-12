@@ -21,14 +21,26 @@ const userSchema = new Schema({
   },
   thoughts: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      thoughtText: {
+        type: String,
+        required: true,
+      },
+      thoughtAuthor: {
+        type: String,
+        required: true,
+      }
     },
   ],
   gameStat: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'GameStat',
+      score: {
+        type: Number,
+        required: true,
+      },
+      difficulty: {
+        type: String,
+        required: true,
+      }
     }
   ]
 });
