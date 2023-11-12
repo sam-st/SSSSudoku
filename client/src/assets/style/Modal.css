@@ -1,5 +1,5 @@
 .scoresModal{
-    background-color: azure;
+    /* background-color: azure; */
     font-weight: bold;
     padding: 12px 20px;
     border: none;
@@ -21,7 +21,7 @@
 }
 
 .instructionsModal{
-  background-color: orange;
+  /* background-color: orange; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;

@@ -1,8 +1,17 @@
 import React from "react";
 import "../style.css";
+import { useNavigate } from 'react-router-dom';
+
 import logo from "../assets/proj3.png";
+import Auth from '../utils/auth';
 
 export default function Game() {
+  const history = useNavigate();
+
+  const handleLogout = () => {
+    Auth.logout();
+    history.push('/');
+  };
 
   const containerStyle = {
     marginTop: "10vh",
@@ -102,21 +111,30 @@ export default function Game() {
               >
                 How to Play
               </a>
-              <a href="/Login" className="btn" style={button2Style}>
-                Login
-              </a>
+              {Auth.loggedIn() ? (
+                <button
+                  className="btn" style={button2Style} onClick={handleLogout}
+                >Logout
+
+                </button>
+
+              ) : (
+                <a href="/Login" className="btn" style={button2Style}>
+                  Login
+                </a>
+              )}
               <a href="/Game" className="btn" style={button3Style}>
                 Play
               </a>
             </div>
             <div className="cardBottom" style={cardBottomStyle}>
-            {getFormattedDate()}
-          </div>
+              {getFormattedDate()}
+            </div>
           </div>
         </div>
       </div>
-      <div class="wrap">
-        <svg class="svg">
+      <div className="wrap">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -128,7 +146,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -140,7 +158,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -152,7 +170,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -164,7 +182,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -176,7 +194,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -188,7 +206,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -200,7 +218,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"
@@ -212,7 +230,7 @@ export default function Game() {
           </text>
         </svg>
 
-        <svg class="svg">
+        <svg className="svg">
           <text
             x="10"
             y="90"

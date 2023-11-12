@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Table from 'react-bootstrap/Table';
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
@@ -8,64 +10,45 @@ function MyScoresModal() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button className="scoresModal "onClick={handleShow}>See My Scores
+      <Button className="btn btn-warning scoresModal "onClick={handleShow}>See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton >
           <Modal.Title>My Scores</Modal.Title>
         </Modal.Header>
-        <Modal.Body><table className='myTable'>
-  <tr className='border border-primary'>
-    <th className='border border-primary'>Date</th>
-    <th className='border border-primary'>Difficulty</th>
-    <th className='border border-primary'>Score</th>
-  </tr>
-  <tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr>
-  <tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr><tr className='border border-primary'>
-    <td className='border border-primary'>Date</td>
-    <td className='border border-primary'>Level</td>
-    <td className='border border-primary' >Score</td>
-  </tr>
-</table>
+        <Modal.Body>
+          
+          
+        <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Score</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        </tr>
+      </tbody>
+    </Table>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn btn-primary" onClick={handleClose}>
+          <Button className="btn btn-warning" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

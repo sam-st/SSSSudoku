@@ -1,9 +1,11 @@
 const typeDefs = `
   type User {
-    _id: ID
+    _id: ID!
     username: String
     email: String
     password: String
+    thoughts: [Thought]
+    gameStat: [GameStat]
   }
 
   type Auth {
@@ -11,23 +13,26 @@ const typeDefs = `
     user: User
   }
 
-  type Query {
-    me: User
-    GameStats: [GameStat]
-    GameStat(gameStatId: ID!): GameStat
-  }
   type GameStat {
-    _id: ID!
-    user: User!
     score: Int!
-    createdAt: String!
     difficulty: String!
+  }
+
+  type Thought {
+    thoughtText: String!
+    thoughtAuthor: String!
+  }
+
+  type Query {
+    me: [User]
+    getThought(thoughtId: ID!): Thought
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(username: String!, password: String!): Auth
-    addGameStat(user: String!, score: Int!, difficulty: String!): Auth
+    addThought(userId: ID!, thoughtAuthor: String!, thoughtText: String! ): User
+    addGameStat(userId: ID!, score: Int!, difficulty: String!): User
   }
 `;
 

@@ -2,11 +2,6 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const gameStatSchema = new Schema({
-	user: {
-		type: Schema.Types.ObjectId,
-		ref: 'User',
-		required: true,
-	},
 	score: {
 		type: Number,
 		required: true,
@@ -26,7 +21,6 @@ const gameStatSchema = new Schema({
 		toJSON: {
 			getters: true,
 		},
-
 		id: false,
 	}
 );
