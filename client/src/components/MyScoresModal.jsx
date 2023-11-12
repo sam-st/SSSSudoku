@@ -8,7 +8,7 @@ function MyScoresModal() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button className="scoresModal "onClick={handleShow}>See My Scores
+      <Button className="btn btn-warning scoresModal "onClick={handleShow}>See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton >

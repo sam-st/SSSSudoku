@@ -1,9 +1,17 @@
 import React from "react";
 import "../style.css";
+import { useNavigate } from 'react-router-dom';
+
 import logo from "../assets/proj3.png";
 import Auth from '../utils/auth';
 
 export default function Game() {
+  const history = useNavigate();
+
+  const handleLogout = () => {
+    Auth.logout();
+    history.push('/');
+  };
 
   const containerStyle = {
     marginTop: "10vh",
@@ -104,21 +112,24 @@ export default function Game() {
                 How to Play
               </a>
               {Auth.loggedIn() ? (
-                <a href="/Logout" className="btn" style={button2Style}>
-                Logout
-              </a>
+                <button
+                  className="btn" style={button2Style} onClick={handleLogout}
+                >Logout
+
+                </button>
+
               ) : (
                 <a href="/Login" className="btn" style={button2Style}>
-                Login
-              </a>
+                  Login
+                </a>
               )}
               <a href="/Game" className="btn" style={button3Style}>
                 Play
               </a>
             </div>
             <div className="cardBottom" style={cardBottomStyle}>
-            {getFormattedDate()}
-          </div>
+              {getFormattedDate()}
+            </div>
           </div>
         </div>
       </div>

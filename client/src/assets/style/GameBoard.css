@@ -3,7 +3,7 @@
 }
 
 .game-header {
-  background-color: darkslateblue;
+  /* background-color: darkslateblue; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@ margin-top: 20px;
 }
 
 .solveButton{
-  background-color: orange;
+  /* background-color: orange; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;
@@ -48,7 +48,7 @@ margin-top: 20px;
   margin: 0px 20px;
 }
 .checkButton{
-  background-color: tomato;
+  /* background-color: tomato; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;
@@ -57,7 +57,7 @@ margin-top: 20px;
   color:black;
 }
 .resetButton{
-  background-color: orange;
+  /* background-color: orange; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;
@@ -80,7 +80,7 @@ margin-top: 20px;
   }
 
   .level{
-    background-color: orange;
+    /* background-color: orange; */
     font-weight: bold;
     padding: 12px 20px;
     border: none;
@@ -104,7 +104,7 @@ margin-top: 20px;
   }
 
   .signInArea{
-      background-color: orange;
+      /* background-color: orange; */
       font-weight: bold;
       padding: 10px 41px 4px 41px;
       border: none;
@@ -115,7 +115,7 @@ margin-top: 20px;
     }
   
     .signIn{
-      background-color: azure;
+      /* background-color: azure; */
       font-weight: bold;
       padding: 12px 20px;
       border: none;
