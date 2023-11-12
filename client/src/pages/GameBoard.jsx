@@ -43,6 +43,7 @@ export default function Game() {
     return JSON.parse(JSON.stringify(arr));
   }
 
+
   function chooseDifficulty(difficultyLevel) {
     level = difficultyLevel;
     if (difficultyLevel === "easy") {
@@ -68,6 +69,8 @@ export default function Game() {
 
   function resetSudoku(initArr) {
     setSudokuArr(initArr);
+
+
   }
 
   function onInputChange(e, row, col, grid) {
@@ -80,6 +83,7 @@ export default function Game() {
     setSudokuArr(grid);
     usergrid = grid;
   }
+
 
   function calculateScore(level, score) {
     if (level === "easy") {
@@ -112,7 +116,8 @@ export default function Game() {
           if (solvedArray[x][y] !== usergrid[x][y]) {
             alert(`YOU'RE BAD`);
             return false;
-          }
+
+
         }
       }
       alert(`Success! You scored: ${score}`);
@@ -131,7 +136,7 @@ export default function Game() {
     return (
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: "40px" }}>
-          <h4>
+          <h4 className="invisible">
             <span>{minutes}</span> minutes <span>{seconds}</span> seconds
           </h4>
         </div>
@@ -139,12 +144,16 @@ export default function Game() {
           <label className="mx-1" for="difficulty">
             Difficulty Level:
           </label>
+
           <select
             className="choices"
             onChange={(e) => handleOnClick(e)}
+
             name="difficulty"
             id="difficulty"
           >
+
+
             <option className="choices" value="null"></option>
             <option className="choices" value="easy">
               Easy
@@ -189,7 +198,6 @@ export default function Game() {
               <div className="modalButtons position-absolute top-0 end-0">
                 <MyScoresModal />
                 <InstructionsModal />
-                <LeaderBoardModal />
               </div>
             </div>
             <div className="position-absolute top-0 start-0">
@@ -199,7 +207,14 @@ export default function Game() {
                   <a href="/Login">
                     <button className="signIn">Sign In</button>
                   </a>
-                  <div></div>
+
+
+                  <a href="/Comment">
+                    <button className="signIn">Save</button>
+                  </a>
+                  <div>
+                  </div>
+
                 </button>
               </div>
             </div>
@@ -211,13 +226,13 @@ export default function Game() {
                     return (
                       <tr
                         key={rIndex}
-                        className={(row + 1) % 3 === -1 ? "bBorder" : ""}
+                        className={(row + 1) % 3 === 0 ? "bBorder" : ""}
                       >
                         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
                           return (
                             <td
                               key={rIndex + cIndex}
-                              className={(col + 1) % 3 === -1 ? "rBorder" : ""}
+                              className={(col + 1) % 3 === 0 ? "rBorder" : ""}
                             >
                               <input
                                 onChange={(e) => onInputChange(e, row, col)}

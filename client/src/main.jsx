@@ -18,6 +18,7 @@ import Game from './pages/GameBoard';
 import Comment from './pages/Comment';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import Auth from './utils/auth';
 import Instructions from './components/Instructions';
 
@@ -47,29 +48,33 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-     <ApolloProvider client={client}>
-    <Router>
-      <App />
-      {Auth.loggedIn() ? (
-        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/game" element={<Game />} />
-        <Route path="/comment" element={<Comment />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/instructions" element={<Instructions />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      ) : (
-        <Routes>
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/difficulty" element={<Difficulty />} /> */}
-        <Route path="/game" element={<Game />} />
-        <Route path="/instructions" element={<Instructions />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-      )}
-     
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <App />
+        {Auth.loggedIn() ? (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+
+            <Route path="/game" element={<Game />} />
+            <Route path="/comment" element={<Comment />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/instructions" element={<Instructions />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/game" element={<Game />} />
+            <Route path="/instructions" element={<Instructions />} />
+            <Route path="*" element={<Login />} />
+          </Routes>
+        )}
+
+      </Router>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
