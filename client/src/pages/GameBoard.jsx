@@ -11,18 +11,18 @@ import "../assets/style/Timer.css";
 import easyGames from "../puzzles/easy_sudoku.json";
 import medGames from "../puzzles/medium_sudoku.json";
 import hardGames from "../puzzles/hard_sudoku.json";
-import difficulty from "../pages/DifficultyLevel";
+// import difficulty from "../pages/DifficultyLevel";
 // import { useLocation } from "react-router-dom";
 // import { Alert } from "react-bootstrap";
 import React from "react";
 import { useStopwatch } from "react-timer-hook";
 
 let solvedArray = [];
-let unsolvedArray = [];
 let usergrid = [];
 let gameArray = [];
 let initArr = [];
 let randomIndex;
+let level ='';
 
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -64,27 +64,22 @@ export default function Game() {
     return gameArray.unsolved;
   }
 
-  function onDifficultyChange(e) {
-    const difficultyLevel = e.target.value;
+  function onDifficultyChange(difficultyLevel) {
+    level = difficultyLevel;
     if (difficultyLevel === "easy") {
       setSudokuArr(easy());
       solvedArray = easyGames[randomIndex].solved;
-      unsolvedArray = easyGames[randomIndex].unsolved;
     } else if (difficultyLevel === "medium") {
       setSudokuArr(medium());
       solvedArray = medGames[randomIndex].solved;
-      unsolvedArray = medGames[randomIndex].unsolved;
     } else {
       setSudokuArr(hard());
       solvedArray = hardGames[randomIndex].solved;
-      unsolvedArray = hardGames[randomIndex].unsolved;
     }
-    return difficultyLevel;
   }
 
-  function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
-    //console.log(randomIndex);
-    setSudokuArr(unsolvedArray);
+  function resetSudoku(initArr) {
+    setSudokuArr(initArr);
   }
 
   function onInputChange(e, row, col, grid) {
@@ -98,48 +93,56 @@ export default function Game() {
     usergrid = grid;
   }
 
-  function calculateScore(level) {
-    console.log(level);
-  }
-
-  function calculateScore(level) {
-    console.log(level);
-  }
-
-  function handleOnClick(e) {
-    difficultyLevelRecorded(e);
-    onDifficultyChange(e);
-  }
-
-  function difficultyLevelRecorded(e) {
-    let level = e.target.value;
-    // console.log(level);
-    calculateScore(level);
+  function calculateScore(level, score) {
     if (level === "easy") {
-      return easy;
+      console.log(level);
+      return score;
     } else if (level === "medium") {
-      return medium;
+      console.log(level);
+      return score * 1.2;
     } else {
-      return hard;
+      console.log(level);
+      return score * 1.4;
     }
   }
 
   function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
-    console.log(solvedArray);
     // console.log(level);
-    console.log(`${minutes}:${seconds}`);
     let score = 1800 - (minutes * 60 + seconds);
+    score = calculateScore(level, score);
     console.log(score);
     for (let x = 0; x < solvedArray.length; x++) {
       for (let y = 0; y < usergrid.length; y++) {
         if (solvedArray[x][y] !== usergrid[x][y]) {
-          alert(`Success! You scored: ${score}`);
+          alert(`YOU'RE BAD`);
           return false;
         }
       }
     }
     alert(`Success! You scored: ${score}`);
     return true;
+  }
+
+  function handleOnClick(e) {
+    difficultyLevelRecorded(e);
+    onDifficultyChange(e.target.value);
+  }
+
+  function difficultyLevelRecorded(e) {
+    level = e.target.value;
+    // console.log(level);
+    if (level === "easy") {
+      console.log(level);
+      easy();
+
+    } else if (level === "medium") {
+      console.log(level);
+      medium();
+
+    } else {
+      console.log(level);
+      hard();
+    }
   }
 
   function MyStopwatch() {
@@ -159,7 +162,7 @@ export default function Game() {
           </label>
           <select
             className="choices"
-            onChange={(e) => handleOnClick(e, { start })}
+            onChange={(e) => handleOnClick(e)}
             name="difficulty"
             id="difficulty"
           >
@@ -187,7 +190,7 @@ export default function Game() {
         </button>
         <button
           className="level"
-          onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)}
+          onClick={(e) => resetSudoku(initArr)}
         >
           Try Again
         </button>
