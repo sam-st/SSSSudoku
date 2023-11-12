@@ -36,5 +36,11 @@ mutation AddGameStat($userId: ID!, $score: Int!, $difficulty: String!) {
       difficulty
     }
   }
-}`
+}
+`;
+
+// export const ADD_THOUGHT = gql `
+
+// `
+
 
