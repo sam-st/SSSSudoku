@@ -1,9 +1,20 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import Auth from './utils/auth'; // replace with the path to your Auth module
+import { useNavigate } from 'react-router-dom';
+import Auth from '../utils/auth'; // replace with the path to your Auth module
 
 function Logout() {
-  const history = useHistory();
+  const button2Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    border: 'none',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+  const history = useNavigate();
 
   const handleLogout = () => {
     Auth.logout();
@@ -11,9 +22,16 @@ function Logout() {
   };
 
   return (
+    <div>
+
     <button onClick={handleLogout}>
       Logout
     </button>
+    <a href="/home" className="btn btn-warning" style={button2Style}>
+                Home
+              </a>
+    </div>
+    
   );
 }
 

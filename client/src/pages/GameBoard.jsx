@@ -65,25 +65,27 @@ export default function Game() {
     return gameArray.unsolved;
   }
 
+
   function onDifficultyChange(difficultyLevel) {
     if (difficultyLevel === "easy") {
       setSudokuArr(easy());
       solvedArray = easyGames[randomIndex].solved;
       unsolvedArray = easyGames[randomIndex].unsolved;
-    } else if (difficultyLevel === "medium") {
+      return 'easy'
+    } else if (level === "medium") {
       setSudokuArr(medium());
       solvedArray = medGames[randomIndex].solved;
       unsolvedArray = medGames[randomIndex].unsolved;
+      return 'medium'
     } else {
       setSudokuArr(hard());
       solvedArray = hardGames[randomIndex].solved;
       unsolvedArray = hardGames[randomIndex].unsolved;
+      return 'hard'
     }
-    return difficultyLevel;
   }
 
   function resetSudoku(randomIndex, solvedArray, unsolvedArray) {
-    //console.log(randomIndex);
     setSudokuArr(unsolvedArray);
   }
 
@@ -97,6 +99,7 @@ export default function Game() {
     setSudokuArr(grid);
     usergrid = grid;
   }
+
 
   function calculateScore(level) {
     console.log(level);
@@ -119,20 +122,25 @@ export default function Game() {
 
   function difficultyLevelRecorded(e) {
     level = e.target.value;
+    console.log(level);
+
     // console.log(level);
     if (level === "easy") {
-      return easy;
+      return 'easy';
     } else if (level === "medium") {
-      return medium;
-    } else {
-      return hard;
+      return 'medium';
+    } else if (level === 'null') {
+      return 'null';
+    }
+    else {
+      return 'hard';
     }
   }
 
   function checkSudoku({ seconds }, { minutes }, solvedArray, usergrid) {
-    console.log(solvedArray);
+    // console.log(solvedArray);
     // console.log(level);
-    console.log(`${minutes}:${seconds}`);
+    // console.log(`${minutes}:${seconds}`);
     let score = 1800 - (minutes * 60 + seconds);
     calculateScore(level, score);
     console.log(score);
@@ -155,7 +163,7 @@ export default function Game() {
     return (
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: "40px" }}>
-          <h4>
+          <h4 className="invisible">
             <span>{minutes}</span> minutes <span>{seconds}</span> seconds
           </h4>
         </div>
@@ -163,12 +171,11 @@ export default function Game() {
           <label className="mx-1" for="difficulty">
             Difficulty Level:
           </label>
+
           <select
             className="choices"
-            onChange={(e) => handleOnClick(e, { start })}
-            name="difficulty"
-            id="difficulty"
-          >
+            onChange={(e) => handleOnClick(e)}
+            name="difficulty" id="difficulty">
             <option className="choices" value="null"></option>
             <option className="choices" value="easy">
               Easy
@@ -209,7 +216,6 @@ export default function Game() {
               <div className="modalButtons position-absolute top-0 end-0">
                 <MyScoresModal />
                 <InstructionsModal />
-                <LeaderBoardModal />
               </div>
             </div>
             <div className="position-absolute top-0 start-0">
@@ -218,6 +224,9 @@ export default function Game() {
                   <h6 className="signInToSave">Sign in to save scores!</h6>
                   <a href="/Login">
                     <button className="signIn">Sign In</button>
+                  </a>
+                  <a href="/Comment">
+                    <button className="signIn">Save</button>
                   </a>
                   <div>
                   </div>
