@@ -16,6 +16,7 @@ import hardGames from "../puzzles/hard_sudoku.json";
 import difficulty from "../pages/DifficultyLevel";
 import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
+
 import React from "react";
 import { useStopwatch } from "react-timer-hook";
 import Comment from '../components/Comment';
@@ -26,7 +27,7 @@ let gameArray = [];
 let initArr = [];
 let randomIndex;
 let level = "";
-
+let score = 0;
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -40,9 +41,6 @@ const initial = [
 ];
 
 export default function Game() {
-  // const [lgshow, setlgShow] = useState(false);
-  // const handleClose = () => setlgShow(false);
-  // const handleShow = () => setlgShow(true);
   const [lgShow, setWinnerShow] = useState(false);
   const [smShow, setLoserShow] = useState(false);
 
@@ -65,13 +63,18 @@ export default function Game() {
     setComment(event.target.value);
     // console.log(event.target.value);
   }
-  const handleClick = () => {
+  const handleClick = (score) => {
     setUpdated(comment);
     console.log(comment);
-    let userComment = comment;
+    let userComment = {
+      Comment: comment,
+      // UserName: ,
+      Score: score
+    };
+    console.log(userComment);
+    console.log(score);
 
-  };
-
+  }
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
 
   function getDeepCopy(arr) {
@@ -81,6 +84,7 @@ export default function Game() {
 
   function chooseDifficulty(difficultyLevel) {
     level = difficultyLevel;
+    console.log(level);
     if (difficultyLevel === "easy") {
       randomIndex = Math.floor(Math.random() * easyGames.length);
       gameArray = easyGames[randomIndex];
@@ -93,7 +97,10 @@ export default function Game() {
       initArr = gameArray.unsolved;
       solvedArray = gameArray.solved;
       setSudokuArr(gameArray.unsolved);
-    } else if (difficultyLevel === "hard") {
+    } else if (difficultyLevel === "null"){
+
+    } 
+    else if (difficultyLevel === "hard") {
       randomIndex = Math.floor(Math.random() * hardGames.length);
       gameArray = hardGames[randomIndex];
       initArr = gameArray.unsolved;
@@ -137,8 +144,8 @@ export default function Game() {
     usergrid,
     initArr
   ) {
-    // console.log(level);
-    let score = 1800 - (minutes * 60 + seconds);
+    console.log(level);
+    score = 1800 - (minutes * 60 + seconds);
     score = calculateScore(level, score);
 
     if (usergrid.length !== 9) {
@@ -149,29 +156,20 @@ export default function Game() {
       for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
           if (solvedArray[x][y] !== usergrid[x][y]) {
-            alert(`YOU'RE BAD`);
+            setLoserShow(true)
             return false;
+          }
         }
+        setWinnerShow(true)
+        return true;
       }
-      alert(`Success! You scored: ${score}`);
-      return true;
     }
-    setWinnerShow(true)
-    return true;
   }
 
   function handleOnClick(e) {
     chooseDifficulty(e.target.value);
-
   }
 
-  // function handlemodal({ seconds }, { minutes }, solvedArray, usergrid, {
-    // pause }){
-    // checkSudoku({ seconds }, { minutes }, solvedArray, usergrid, {
-      // pause,
-    // })
-    
-  // }
   function MyStopwatch() {
     const { seconds, minutes, isRunning, start, pause } = useStopwatch({
       autoStart: true,
@@ -179,7 +177,7 @@ export default function Game() {
     return (
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: "40px" }}>
-          <h4 className="invisible">
+          <h4 className='invisible'>
             <span>{minutes}</span> minutes <span>{seconds}</span> seconds
           </h4>
         </div>
@@ -226,7 +224,7 @@ export default function Game() {
         >
           Finished
         </button>
-        <button className="level" onClick={(e) => resetSudoku(initArr)}>
+        <button className="btn btn-warning level" onClick={(e) => resetSudoku(initArr)}>
 
           Try Again
         </button>
@@ -242,11 +240,12 @@ export default function Game() {
               <div className="modalButtons position-absolute top-0 end-0">
               </div>
             </div>
-             <div className="position-absolute top-0 start-0 mx-3 mt-3"> 
-                <MyScoresModal />
-                <InstructionsModal />
-              
-            </div> 
+            <div className="position-absolute top-0 start-0 mx-3 mt-3">
+              <MyScoresModal />
+              <InstructionsModal />
+              <a href="/home"><button className="btn btn-warning scoresModal">Home</button></a>
+
+            </div>
             <div className="game-header">
               <h3 className="mt-2 fs-1">Sudoku</h3>
               <table>
@@ -285,120 +284,105 @@ export default function Game() {
                 </tbody>
               </table>
               <div className="buttonContainer">
-        <>
-          
-      <Modal
-        size="lg"
-        show={lgShow}
-        onHide={() => setWinnerShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-1">
-Congratulations! Your Score: {}      </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <div class="position-absolute top-50 start-50 translate-middle w-100">
+                <>
 
-              {/* <div className='text-center mb-5'>
+                  <Modal
+                    size="lg"
+                    show={lgShow}
+                    onHide={() => setWinnerShow(false)}
+                    aria-labelledby="example-modal-sizes-title-lg"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-1">
+                        Congratulations! Your Score: { }      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div>
+                        <div class="position-absolute top-50 start-50 translate-middle w-100">
+
+                          {/* <div className='text-center mb-5'>
 
 <h1 className='fs-1 text-black '>Congratulations!!!</h1>
 <h3 className='text-black fs-3'>You finished the game! </h3>
 
 </div> */}
-              <div className='mx-2 input-group mb-3'>
-                <input className='form-control'
-                  type="text"
-                  placeholder="Type you comment here!"
-                  id="message"
-                  name="message"
-                  onChange={handleChange}
-                  value={comment}
-                />
- <div class="input-group-append mx-2">
-    
- {Auth.loggedIn() ? (
-    <button className="btn btn-warning mx-1" onClick={handleClick} type="button">Save</button>
- ) : (  <a href="/Login"> <button
-  className="btn btn-warning mx-1"> 
-  Login
- </button>
-</a>)}
-    <a href='/game'>
-      <button class="btn btn-warning mx-1" type="button">Play Again</button>    
-            </a>
-   <a href='/home'>
-    <button class="btn btn-warning mx-1" type="button">Home</button>
-    </a> 
-    
+                          <div className='mx-2 input-group mb-3'>
+                            <input className='form-control'
+                              type="text"
+                              placeholder="Type you comment here!"
+                              id="message"
+                              name="message"
+                              onChange={handleChange}
+                              value={comment}
+                            />
+                            <div class="input-group-append mx-2">
 
-  </div>
-              </div>
-            </div>
-            <div class="position-absolute bottom-0 start-00 translate-middle-x">
-<Confetti
-  width={window.innerWidth}
-  height={window.innerHeight}
-  numberOfPieces={600}
-/>
-             
-            </div>
-          </div>
-        </Modal.Body>      </Modal>
-    </>
-
-    <Modal
-        size="sm"
-        show={smShow}
-        onHide={() => setLoserShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-1">
-Try Again!          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <div class="position-absolute top-50 start-50 translate-middle w-100">
+                              {Auth.loggedIn() ? (
+                                <button className="btn btn-warning mx-1" onClick={handleClick} type="button">Save</button>
+                              ) : (<a href="/Login"> <button
+                                className="btn btn-warning mx-1">
+                                Login
+                              </button>
+                              </a>)}
+                              <a href='/game'>
+                                <button class="btn btn-warning mx-1" type="button">Play Again</button>
+                              </a>
+                              <a href='/home'>
+                                <button class="btn btn-warning mx-1" type="button">Home</button>
+                              </a>
 
 
-              <div className='mx-2 input-group mb-3'>
-                <input className='form-control'
-                  type="text"
-                  placeholder="Type you comment here!"
-                  id="message"
-                  name="message"
-                  onChange={handleChange}
-                  value={comment}
-                />
- <div class="input-group-append mx-2">
-    
+                            </div>
+                          </div>
+                        </div>
+                        <div class="position-absolute bottom-0 start-00 translate-middle-x">
+                          <Confetti
+                            width={window.innerWidth}
+                            height={window.innerHeight}
+                            numberOfPieces={600}
+                          />
 
-    <a href='/game'>
-      <button class="btn btn-warning mx-1" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>    
-            </a>
+                        </div>
+                      </div>
+                    </Modal.Body>      </Modal>
+                </>
 
-           
-   <a href='/home'>
-    <button class="btn btn-warning mx-1" type="button">Home</button>
-    </a> 
-    
+                <Modal
+                  size="sm"
+                  show={smShow}
+                  onHide={() => setLoserShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg" className="text-center text-black fs-1">
+                      Try Again!          </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <div>
+                      <div class="position-absolute top-50 start-50 translate-middle w-100">
+<div className="text-center">
 
-  </div>
-              </div>
-            </div>
-            <div class="position-absolute bottom-0 start-00 translate-middle-x">
-{/* <Confetti
+                      <a href='/game'>
+                              <button class="btn btn-sm btn-warning m-2" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>
+                            </a>
+
+
+                            <a href='/home'>
+                              <button class="btn btn-sm btn-warning m-2" type="button">Home</button>
+                            </a>
+</div>
+                      </div>
+                      <div class="position-absolute bottom-0 start-00 translate-middle-x">
+                        {/* <Confetti
   width={window.innerWidth}
   height={window.innerHeight}
   numberOfPieces={600}
 /> */}
-             
-            </div>
-          </div>
-        </Modal.Body>      </Modal>
-    
+
+                      </div>
+                    </div>
+                  </Modal.Body>      </Modal>
+
                 <div>
                   <MyStopwatch />
                 </div>
