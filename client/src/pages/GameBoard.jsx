@@ -23,6 +23,7 @@ let usergrid = [];
 let gameArray = [];
 let initArr = [];
 let randomIndex;
+let level = '';
 
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -64,8 +65,7 @@ export default function Game() {
     return gameArray.unsolved;
   }
 
-  function onDifficultyChange(e) {
-    const difficultyLevel = e.target.value;
+  function onDifficultyChange(difficultyLevel) {
     if (difficultyLevel === "easy") {
       setSudokuArr(easy());
       solvedArray = easyGames[randomIndex].solved;
@@ -102,19 +102,24 @@ export default function Game() {
     console.log(level);
   }
 
-  function calculateScore(level) {
-    console.log(level);
+  function calculateScore(level, score) {
+    if (level === "easy") {
+      return score;
+    } else if (score === "medium") {
+      return score * 1.2;
+    } else {
+      return score * 1.4;
+    }
   }
 
   function handleOnClick(e) {
-    difficultyLevelRecorded(e);
-    onDifficultyChange(e);
+    level = difficultyLevelRecorded(e);
+    onDifficultyChange(level);
   }
 
   function difficultyLevelRecorded(e) {
-    let level = e.target.value;
+    level = e.target.value;
     // console.log(level);
-    calculateScore(level);
     if (level === "easy") {
       return easy;
     } else if (level === "medium") {
@@ -129,11 +134,12 @@ export default function Game() {
     // console.log(level);
     console.log(`${minutes}:${seconds}`);
     let score = 1800 - (minutes * 60 + seconds);
+    calculateScore(level, score);
     console.log(score);
     for (let x = 0; x < solvedArray.length; x++) {
       for (let y = 0; y < usergrid.length; y++) {
         if (solvedArray[x][y] !== usergrid[x][y]) {
-          alert(`Success! You scored: ${score}`);
+          alert(`YOU'RE BAD`);
           return false;
         }
       }
@@ -226,13 +232,13 @@ export default function Game() {
                     return (
                       <tr
                         key={rIndex}
-                        className={(row + 1) % 3 === -1 ? "bBorder" : ""}
+                        className={(row + 1) % 3 === 0 ? "bBorder" : ""}
                       >
                         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
                           return (
                             <td
                               key={rIndex + cIndex}
-                              className={(col + 1) % 3 === -1 ? "rBorder" : ""}
+                              className={(col + 1) % 3 === 0 ? "rBorder" : ""}
                             >
                               <input
                                 onChange={(e) => onInputChange(e, row, col)}
