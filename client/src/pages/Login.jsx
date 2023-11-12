@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { LOGIN_USER,ADD_USER  }from '../utils/mutations';
+import { LOGIN_USER, ADD_USER } from '../utils/mutations';
+import "../style.css";
 import { useMutation } from '@apollo/react-hooks';
 import Auth from '../utils/auth';
+
+
 function Login() {
+  const button2Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
+
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [signupUsername, setSignupUsername] = useState('');
@@ -12,28 +29,28 @@ function Login() {
   const [login, { error }] = useMutation(LOGIN_USER);
   const [addUser] = useMutation(ADD_USER);
 
-  const handleLoginSubmit =async (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
     console.log(`Login Username: ${loginUsername}, Login Password: ${loginPassword}`);
-    try{
-      const{data}=await login({ variables: { username: loginUsername, password: loginPassword } });
-    Auth.login(data.login.token);
-    }catch(e){
+    try {
+      const { data } = await login({ variables: { username: loginUsername, password: loginPassword } });
+      Auth.login(data.login.token);
+    } catch (e) {
       console.log(e);
     }
-    
+
   };
 
-  const handleSignupSubmit =async (event) => {
+  const handleSignupSubmit = async (event) => {
     event.preventDefault();
     console.log(`Signup Username: ${signupUsername}, Signup Password: ${signupPassword}, Signup Email: ${signupEmail}`);
-    try{
-        const{data}=await addUser({ variables: { username: signupUsername, password: signupPassword, email: signupEmail } }); 
-    Auth.login(data.addUser.token);
-    }catch(e){
+    try {
+      const { data } = await addUser({ variables: { username: signupUsername, password: signupPassword, email: signupEmail } });
+      Auth.login(data.addUser.token);
+    } catch (e) {
       console.log(e);
     }
-  
+
   };
 
   return (
@@ -50,7 +67,9 @@ function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit">Login</Button>
+            <a href="/Comment" className="btn" style={button2Style}>
+                Login
+              </a>
           </Form>
         </Col>
         <Col>
@@ -68,7 +87,11 @@ function Login() {
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit">Sign Up</Button>
+            <a href="/Comment" className="btn" style={button2Style}>
+                Sign Up
+              </a>
+
+
           </Form>
         </Col>
       </Row>

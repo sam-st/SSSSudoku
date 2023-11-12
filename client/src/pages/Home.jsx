@@ -102,9 +102,9 @@ export default function Game() {
               >
                 How to Play
               </a>
-              <a href="/Login" className="btn" style={button2Style}>
-                Login
-              </a>
+              {/* <a href="/Login" className="btn" style={button2Style}> */}
+                {/* Login */}
+              {/* </a> */}
               <a href="/Game" className="btn" style={button3Style}>
                 Play
               </a>
