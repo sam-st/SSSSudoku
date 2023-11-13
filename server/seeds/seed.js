@@ -14,6 +14,8 @@ db.once('open', async () => {
 
 		await User.create({ username, email, password });
 
+		await User.create(userData)
+
 		console.log('Users, Game Stats, and Thoughts are seeded!');
 		process.exit(0);
 	} catch (error) {

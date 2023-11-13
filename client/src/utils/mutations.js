@@ -39,8 +39,19 @@ mutation AddGameStat($userId: ID!, $score: Int!, $difficulty: String!) {
 }
 `;
 
-// export const ADD_THOUGHT = gql `
-
-// `
+export const ADD_THOUGHT = gql `
+mutation Mutation($userId: ID!, $thoughtAuthor: String!, $thoughtText: String!) {
+  addThought(userId: $userId, thoughtAuthor: $thoughtAuthor, thoughtText: $thoughtText) {
+    _id
+    username
+    email
+    password
+    thoughts {
+      thoughtText
+      thoughtAuthor
+    }
+  }
+}
+`;
 
 
