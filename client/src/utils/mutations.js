@@ -24,4 +24,34 @@ export const ADD_USER = gql`
     }
   }
 `;
+export const ADD_GAMESTAT = gql`
+mutation AddGameStat($userId: ID!, $score: Int!, $difficulty: String!) {
+  addGameStat(userId: $userId, score: $score, difficulty: $difficulty) {
+    _id
+    username
+    email
+    password
+    gameStat {
+      score
+      difficulty
+    }
+  }
+}
+`;
+
+export const ADD_THOUGHT = gql `
+mutation Mutation($userId: ID!, $thoughtAuthor: String!, $thoughtText: String!) {
+  addThought(userId: $userId, thoughtAuthor: $thoughtAuthor, thoughtText: $thoughtText) {
+    _id
+    username
+    email
+    password
+    thoughts {
+      thoughtText
+      thoughtAuthor
+    }
+  }
+}
+`;
+
 

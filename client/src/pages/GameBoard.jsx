@@ -354,45 +354,26 @@ export default function Game() {
                   aria-labelledby="example-modal-sizes-title-lg"
                 >
                   <Modal.Header closeButton>
-                    <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-1">
+                    <Modal.Title id="example-modal-sizes-title-lg" className="text-center text-black fs-1">
                       Try Again!          </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <div>
                       <div class="position-absolute top-50 start-50 translate-middle w-100">
+<div className="text-center">
 
-
-                        <div className='mx-2 input-group mb-3'>
-                          <input className='form-control'
-                            type="text"
-                            placeholder="Type you comment here!"
-                            id="message"
-                            name="message"
-                            onChange={handleChange}
-                            value={comment}
-                          />
-                          <div class="input-group-append mx-2">
-
-
-                            <a href='/game'>
-                              <button class="btn btn-warning mx-1" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>
+                      <a href='/game'>
+                              <button class="btn btn-sm btn-warning m-2" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>
                             </a>
 
 
                             <a href='/home'>
-                              <button class="btn btn-warning mx-1" type="button">Home</button>
+                              <button class="btn btn-sm btn-warning m-2" type="button">Home</button>
                             </a>
-
-
-                          </div>
-                        </div>
+</div>
                       </div>
                       <div class="position-absolute bottom-0 start-00 translate-middle-x">
-                        {/* <Confetti
-  width={window.innerWidth}
-  height={window.innerHeight}
-  numberOfPieces={600}
-/> */}
+                    
 
                       </div>
                     </div>

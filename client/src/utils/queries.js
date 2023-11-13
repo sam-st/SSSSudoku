@@ -1,18 +1,21 @@
 import { gql } from '@apollo/client';
 
+// Query to get user data
 export const QUERY_me = gql`
-  query user {
-    user {
-      _id
-      username
-      email
-      thoughts {
-        _id
-        thoughtText
-        createdAt
-      }
+query Query {
+  me {
+    _id
+    username
+    email
+    password
+    thoughts {
+      thoughtText
+      thoughtAuthor
+    }
+    gameStat {
+      score
+      difficulty
     }
   }
+}
 `;
-
-
