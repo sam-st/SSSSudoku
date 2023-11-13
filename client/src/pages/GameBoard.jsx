@@ -9,7 +9,7 @@ import Confetti from 'react-confetti';
 import Button from "react-bootstrap/Button";
 import "../assets/style/GameBoard.css";
 import { useState, useEffect } from "react";
-import "../assets/style/Timer.css";
+// import "../assets/style/Timer.css";
 import easyGames from "../puzzles/easy_sudoku.json";
 import medGames from "../puzzles/medium_sudoku.json";
 import hardGames from "../puzzles/hard_sudoku.json";
@@ -18,7 +18,7 @@ import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
 
 import React from "react";
-import { useStopwatch } from "react-timer-hook";
+// import { useStopwatch } from "react-timer-hook";
 import Comment from '../components/Comment';
 
 let solvedArray = [];
