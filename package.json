@@ -19,6 +19,7 @@
     "dependencies": {
         "react-confetti": "^6.1.0",
         "react-confetti-canvas": "^0.1.1",
-        "react-timer-hook": "^3.0.7"
+        "react-timer-hook": "^3.0.7",
+        "use-sound": "^4.0.1"
     }
 }

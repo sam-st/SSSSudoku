@@ -13,23 +13,23 @@ function InstructionsModal() {
       <Button className="btn btn-warning instructionsModal" onClick={handleShow}>
         How to Play      </Button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>How to Play</Modal.Title>
+        <Modal.Header>
+          <Modal.Title className='text-black fs-1'>How to Play</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ul>
-            <li>
+            <li className='fs-5 text-black'>
               Have each 3x3 square, each row, and each column have a number from 1 - 9.
             </li>
             <img src={howToPlay} className="img-fluid  card-img-top rounded" style={{ width: "40%" }} alt="site pictures"></img>
-            <li>
+            <li className='text-black fs-5'>
               No repeat numbers allowed per row, column, or 3x3 square.
             </li>
             <img src={howNotToPlay} className="img-fluid  card-img-top rounded" style={{ width: "40%" }} alt="site pictures"></img>
           </ul>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className='btn btn-warning' onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
