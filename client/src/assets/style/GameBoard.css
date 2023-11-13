@@ -23,104 +23,110 @@
   color: black
 }
 
-table{
+table {
   border-collapse: collapse;
   border: 3px solid bisque;
   background-color: bisque;
 }
 
-td{
+td {
   padding: 0;
 }
 
-.buttonContainer{
-margin-top: 20px;
+.buttonContainer {
+  margin-top: 20px;
 }
 
-.solveButton{
+.solveButton {
   /* background-color: orange; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;
   border-radius: 10px;
   font-size: 14px;
-  color:black;
+  color: black;
   margin: 0px 20px;
 }
-.checkButton{
+
+.checkButton {
   /* background-color: tomato; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;
   border-radius: 10px;
   font-size: 14px;
-  color:black;
+  color: black;
 }
-.resetButton{
+
+.resetButton {
   /* background-color: orange; */
   font-weight: bold;
   padding: 12px 20px;
   border: none;
   border-radius: 10px;
   font-size: 14px;
-  color:black;
+  color: black;
 }
 
-.bBorder{
+.bBorder {
   border-bottom: 2px solid black;
-  }
+}
 
-  
-.rBorder{
+
+.rBorder {
   border-right: 2px solid black;
-  }
+}
 
-  .modalButtons{
-    margin: 10px 10px;
-  }
+.modalButtons {
+  margin: 10px 10px;
+}
 
-  .level{
-    /* background-color: orange; */
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 10px;
-    font-size: 14px;
-    color:black;
-    margin: 10px 10px;
-  }
+.level {
+  /* background-color: orange; */
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  margin: 10px 10px;
+}
 
-  .choices{
-    font-weight: bold;
-    font-size: 12px;
-    background-color: azure;
+.choices {
+  font-weight: bold;
+  font-size: 12px;
+  background-color: azure;
 
-  }
+}
 
-  .signInToSave{
-    font-size: 14px;
-    font-weight: bold;
+.signInToSave {
+  font-size: 14px;
+  font-weight: bold;
 
-  }
+}
 
-  .signInArea{
-      /* background-color: orange; */
-      font-weight: bold;
-      padding: 10px 41px 4px 41px;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      color:black;
-      margin: 0px 10px;
-    }
-  
-    .signIn{
-      /* background-color: azure; */
-      font-weight: bold;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      color:black;
-      margin: 0px 10px;
-    }
+.signInArea {
+  /* background-color: orange; */
+  font-weight: bold;
+  padding: 10px 41px 4px 41px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  margin: 0px 10px;
+}
+
+.signIn {
+  /* background-color: azure; */
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  margin: 0px 10px;
+}
+
+.translate-middle-xx {
+  transform: translateX(-25%) !important;
+}
