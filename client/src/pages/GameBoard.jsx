@@ -11,6 +11,7 @@ import medGames from "../puzzles/medium_sudoku.json";
 import hardGames from "../puzzles/hard_sudoku.json";
 import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { useStopwatch } from "react-timer-hook";
 import Comment from '../components/CommentModal';
@@ -41,6 +42,26 @@ const initial = [
 export default function Game() {
   const [lgShow, setWinnerShow] = useState(false);
   const [smShow, setLoserShow] = useState(false);
+  const [score, setScore] = useState(0);
+
+useEffect(() => {
+  if (localStorage.getItem("completed") === "true") {
+    setWinnerShow(true);
+    localStorage.setItem("completed", false);
+  }
+},[])
+
+  const button2Style = {
+    margin: "0 10px", // Add margin between buttons
+    width: "180px",
+    border: 'none',
+    padding: '10px 20px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    cursor: 'pointer',
+    borderRadius: '16px'
+  };
   // const [isStarted, setIsStarted] = useState(false);
   const [comment, setComment] = useState('');
   const [updated, setUpdated] = useState(comment);
@@ -50,18 +71,29 @@ export default function Game() {
   const handleChange = (event) => {
     setComment(event.target.value);
   }
-  const handleClick = (score) => {
+  const handleClick = () => {
     setUpdated(comment);
     let userComment = {
       Comment: comment,
       // UserName: ,
       Score: score
     };
+    console.log(userComment);
+    console.log(score);
+    localStorage.setItem("userComment", JSON.stringify(userComment));
+setWinnerShow(false)
   }
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
-
+const navigate=useNavigate()
   function getDeepCopy(arr) {
     return JSON.parse(JSON.stringify(arr));
+  }
+
+  function saveFinalScore() {
+    console.log(score);
+    localStorage.setItem("score", score);
+    localStorage.setItem("completed", true);
+    navigate('/login')
   }
 
   function chooseDifficulty(difficultyLevel) {
@@ -129,9 +161,15 @@ export default function Game() {
     solvedArray,
     usergrid,
     initArr
+  ) {
+    console.log(level);
+    var scoreVar = 1800 - (minutes * 60 + seconds);
+    scoreVar = calculateScore(level, scoreVar);
+    setScore(scoreVar);
+
     ) {
-    score = 1800 - (minutes * 60 + seconds);
-    score = calculateScore(level, score);
+    //score = 1800 - (minutes * 60 + seconds);
+   //score = calculateScore(level, score);
     
     if (usergrid.length !== 9) {
     }
@@ -140,7 +178,7 @@ export default function Game() {
       for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
           if (solvedArray[x][y] !== usergrid[x][y]) {
-            setLoserShow(true)
+            setWinnerShow(true)
             return false;
           }
         }
@@ -305,7 +343,7 @@ export default function Game() {
 
                               {Auth.loggedIn() ? (
                                 <button className="btn btn-warning mx-1" onClick={handleClick} type="button">Save</button>
-                              ) : (<a href="/Login"> <button
+                              ) : (<a href="#"> <button onClick={saveFinalScore}
                                 className="btn btn-warning mx-1">
                                 Login
                               </button>
