@@ -34,7 +34,7 @@ export default function Instructions() {
 
       </ul>
       </div>
-    <a href="/home" className="btn  position-absolute top-98 end-95 mt-2 btn-warning" style={button2Style}>
+    <a href="/home" className="btn position-absolute bottom-0 end-95 mb-3 btn-warning" style={button2Style}>
               Home
             </a>
     </div>
