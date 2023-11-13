@@ -9,16 +9,17 @@ import Confetti from 'react-confetti';
 import Button from "react-bootstrap/Button";
 import "../assets/style/GameBoard.css";
 import { useState, useEffect } from "react";
-// import "../assets/style/Timer.css";
+import "../assets/style/Timer.css";
 import easyGames from "../puzzles/easy_sudoku.json";
 import medGames from "../puzzles/medium_sudoku.json";
 import hardGames from "../puzzles/hard_sudoku.json";
 import difficulty from "../pages/DifficultyLevel";
 import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
+import { useNavigate } from "react-router-dom";
 
 import React from "react";
-// import { useStopwatch } from "react-timer-hook";
+import { useStopwatch } from "react-timer-hook";
 import Comment from '../components/Comment';
 
 let solvedArray = [];
@@ -43,7 +44,14 @@ const initial = [
 export default function Game() {
   const [lgShow, setWinnerShow] = useState(false);
   const [smShow, setLoserShow] = useState(false);
+  const [score, setScore] = useState(0);
 
+useEffect(() => {
+  if (localStorage.getItem("completed") === "true") {
+    setWinnerShow(true);
+    localStorage.setItem("completed", false);
+  }
+},[])
 
   const button2Style = {
     margin: "0 10px", // Add margin between buttons
@@ -63,7 +71,7 @@ export default function Game() {
     setComment(event.target.value);
     // console.log(event.target.value);
   }
-  const handleClick = (score) => {
+  const handleClick = () => {
     setUpdated(comment);
     console.log(comment);
     let userComment = {
@@ -73,14 +81,21 @@ export default function Game() {
     };
     console.log(userComment);
     console.log(score);
-
+    localStorage.setItem("userComment", JSON.stringify(userComment));
+setWinnerShow(false)
   }
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
-
+const navigate=useNavigate()
   function getDeepCopy(arr) {
     return JSON.parse(JSON.stringify(arr));
   }
 
+  function saveFinalScore() {
+    console.log(score);
+    localStorage.setItem("score", score);
+    localStorage.setItem("completed", true);
+    navigate('/login')
+  }
 
   function chooseDifficulty(difficultyLevel) {
     level = difficultyLevel;
@@ -145,8 +160,9 @@ export default function Game() {
     initArr
   ) {
     console.log(level);
-    score = 1800 - (minutes * 60 + seconds);
-    score = calculateScore(level, score);
+    var scoreVar = 1800 - (minutes * 60 + seconds);
+    scoreVar = calculateScore(level, scoreVar);
+    setScore(scoreVar);
 
     if (usergrid.length !== 9) {
       console.log("empty puzzle");
@@ -156,7 +172,7 @@ export default function Game() {
       for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
           if (solvedArray[x][y] !== usergrid[x][y]) {
-            setLoserShow(true)
+            setWinnerShow(true)
             return false;
           }
         }
@@ -319,7 +335,7 @@ export default function Game() {
 
                               {Auth.loggedIn() ? (
                                 <button className="btn btn-warning mx-1" onClick={handleClick} type="button">Save</button>
-                              ) : (<a href="/Login"> <button
+                              ) : (<a href="#"> <button onClick={saveFinalScore}
                                 className="btn btn-warning mx-1">
                                 Login
                               </button>
