@@ -1,51 +1,50 @@
-import { useState } from 'react';
-import Table from 'react-bootstrap/Table';
+import { useState } from "react";
+import Table from "react-bootstrap/Table";
+import { useQuery } from "@apollo/client";
+import { QUERY_me } from "../utils/queries";
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import "../assets/style/Modal.css";
+
 function MyScoresModal() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const { loading, error, data } = useQuery(QUERY_me);
+
+  if (loading) return <p>Please wait...</p>;
+  if (error) return <p>Sorry, could not load user data</p>;
+
   return (
     <>
-      <Button className="btn btn-warning scoresModal "onClick={handleShow}>See My Scores
+      <Button className="btn btn-warning scoresModal " onClick={handleShow}>
+        See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton >
+        <Modal.Header closeButton>
           <Modal.Title>My Scores</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
-          
-        <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>User Name</th>
-          <th>Score</th>
-          <th>Comment</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-
-        </tr>
-      </tbody>
-    </Table>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Difficulty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.me.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.username}</td>
+                  <td>{user.gameStat && user.gameStat[0] ? user.gameStat[0].score : 'N/A'}</td>
+                  <td>{user.gameStat && user.gameStat[0] ? user.gameStat[0].difficulty : 'N/A'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Modal.Body>
         <Modal.Footer>
           <Button className="btn btn-warning" onClick={handleClose}>
