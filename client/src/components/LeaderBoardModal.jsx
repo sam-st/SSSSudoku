@@ -12,10 +12,10 @@ function LeaderBoardModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // const { loading, error, data } = useQuery(QUERY_me);
-
-  // if (loading) return <p>Please wait...</p>;
-  // if (error) return <p>Sorry, could not load user data</p>;
+  const { loading, error, data } = useQuery(QUERY_me);
+  console.log(data);
+  if (loading) return <p>Please wait...</p>;
+  if (error) return <p>Sorry, could not load user data</p>;
 
   // Sorts users by score in leading order from highest to lowest
   const LeaderBoardUsers = data.me.filter(
