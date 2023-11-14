@@ -45,7 +45,7 @@ function MyScoresModal() {
 
   return (
     <>
-      <Button className="btn btn-warning scoresModal " onClick={handleShow}>
+      <Button className="btn btn-warning scoresModal m-1 " onClick={handleShow}>
         See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>

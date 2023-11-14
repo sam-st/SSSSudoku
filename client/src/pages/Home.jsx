@@ -140,7 +140,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             1
           </text>
@@ -152,7 +152,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             2
           </text>
@@ -164,7 +164,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             3
           </text>
@@ -176,7 +176,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             4
           </text>
@@ -188,7 +188,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             5
           </text>
@@ -200,7 +200,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             6
           </text>
@@ -212,7 +212,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             7
           </text>
@@ -224,7 +224,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             8
           </text>
@@ -236,7 +236,7 @@ export default function Game() {
             y="90"
             font-family="Helvetica, Arial, sans-serif"
             font-size="80"
-            fill="white"
+            fill="black"
           >
             9
           </text>
