@@ -16,8 +16,6 @@ import React from "react";
 import { useStopwatch } from "react-timer-hook";
 import Comment from '../components/CommentModal';
 import LeaderBoard from '../components/LeaderBoardModal';
-// import useSound from 'use-sound';
-// import click from '../assets/click.mp3';
 import demo from "../puzzles/demo.json";
 let solvedArray = [];
 let usergrid = [];
@@ -26,7 +24,11 @@ let initArr = [];
 let randomIndex;
 let level = "";
 let score = 0;
-
+let startingTime = 0;
+let endingTime = 0;
+let difference = 0;
+let userScore = 0;
+let scoreVar = 0;
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -44,12 +46,12 @@ export default function Game() {
   const [smShow, setLoserShow] = useState(false);
   const [score, setScore] = useState(0);
 
-useEffect(() => {
-  if (localStorage.getItem("completed") === "true") {
-    setWinnerShow(true);
-    localStorage.setItem("completed", false);
-  }
-},[])
+  useEffect(() => {
+    if (localStorage.getItem("completed") === "true") {
+      setWinnerShow(false);
+      localStorage.setItem("completed", false);
+    }
+  }, [])
 
   const button2Style = {
     margin: "0 10px", // Add margin between buttons
@@ -62,35 +64,25 @@ useEffect(() => {
     cursor: 'pointer',
     borderRadius: '16px'
   };
-  // const [isStarted, setIsStarted] = useState(false);
   const [comment, setComment] = useState('');
   const [updated, setUpdated] = useState(comment);
 
-  
-  
   const handleChange = (event) => {
     setComment(event.target.value);
   }
   const handleClick = () => {
+    userScore = localStorage.getItem("score");
     setUpdated(comment);
-    let userComment = {
-      Comment: comment,
-      // UserName: ,
-      Score: score
-    };
-    console.log(userComment);
-    console.log(score);
     localStorage.setItem("userComment", JSON.stringify(userComment));
-setWinnerShow(false)
+    setWinnerShow(false)
   }
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(initial));
-const navigate=useNavigate()
+  const navigate = useNavigate()
   function getDeepCopy(arr) {
     return JSON.parse(JSON.stringify(arr));
   }
 
   function saveFinalScore() {
-    console.log(score);
     localStorage.setItem("score", score);
     localStorage.setItem("completed", true);
     navigate('/login')
@@ -98,7 +90,6 @@ const navigate=useNavigate()
 
   function chooseDifficulty(difficultyLevel) {
     level = difficultyLevel;
-    console.log(level);
     if (difficultyLevel === "easy") {
       randomIndex = Math.floor(Math.random() * easyGames.length);
       gameArray = easyGames[randomIndex];
@@ -124,59 +115,56 @@ const navigate=useNavigate()
       solvedArray = gameArray.solved;
       setSudokuArr(gameArray.unsolved);
     }
-    // setIsStarted(true)
   }
 
   function resetSudoku(initArr) {
     setSudokuArr(initArr);
   }
-  
+
   function onInputChange(e, row, col, grid) {
     var val = parseInt(e.target.value) || -1,
-    grid = getDeepCopy(sudokuArr);
+      grid = getDeepCopy(sudokuArr);
     if (val === -1 || (val >= 1 && val <= 9)) {
       grid[row][col] = val;
     }
     setSudokuArr(grid);
     usergrid = grid;
-    // ClickButton();
   }
-  
+
   function calculateScore(level, score) {
     if (level === "easy") {
       return score;
     } else if (level === "medium") {
       return score * 1.2;
-    }  else if (level === "demo") {
+    } else if (level === "demo") {
       return score;
     }
     else {
       return score * 1.4;
     }
   }
-  
+
   function checkSudoku(
-    { seconds },
-    { minutes },
     solvedArray,
     usergrid,
     initArr
   ) {
-    console.log(level);
-    var scoreVar = 1800 - (minutes * 60 + seconds);
+    endTime();
+    difference = Math.ceil((endingTime - startingTime) / 1000);
+
+    calculateTime();
+    var scoreVar = 1800 - difference;
     scoreVar = calculateScore(level, scoreVar);
     setScore(scoreVar);
-    //score = 1800 - (minutes * 60 + seconds);
-   //score = calculateScore(level, score);
-    
+
     if (usergrid.length !== 9) {
     }
-    
+
     if (usergrid.length == 9) {
       for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
           if (solvedArray[x][y] !== usergrid[x][y]) {
-            setWinnerShow(true)
+            setLoserShow(true)
             return false;
           }
         }
@@ -185,80 +173,25 @@ const navigate=useNavigate()
       }
     }
   }
-  
+
+
+  function startTime() {
+    const d = new Date();
+    startingTime = d.getTime();
+  }
+
+  function endTime() {
+    const d = new Date();
+    endingTime = d.getTime();
+  }
+
+  function calculateTime() {
+  }
   function handleOnClick(e) {
     chooseDifficulty(e.target.value);
+    startTime();
   }
-  
-  function MyStopwatch() {
-    const { seconds, minutes, isRunning, pause } = useStopwatch({
-      autoStart: true,
-    });
-    return (
-      <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: "40px" }}>
-          <h4 className=
-          // {
-            // !isStarted ? 
-            "invisible" 
-            // :
-            //  ""}
-             >
-            <span>{minutes}</span> minutes <span>{seconds}</span> seconds
-          </h4>
-        </div>
-        <button className="btn btn-warning level">
-          <label className="mx-1" for="difficulty">
-            Difficulty Level:
-          </label>
 
-          <select
-            className="choices"
-            onChange={(e) => handleOnClick(e)}
-            name="difficulty"
-            id="difficulty"
-          >
-            <option className="choices" value="null"></option>
-            <option className="choices" value="demo">Demo</option>
-            <option className="choices" value="easy">
-              Easy
-            </option>
-            <option className="choices" value="medium">
-              Medium
-            </option>
-            <option className="choices" value="hard">
-              Hard
-            </option>
-          </select>
-        </button>
-        <button
-          className="btn btn-warning level"
-          onClick={(e) =>
-            checkSudoku(
-              { seconds },
-              { minutes },
-              solvedArray,
-              usergrid,
-              initArr,
-              {
-                pause,
-              }
-            )
-          }
-        >
-          Finished
-        </button>
-        <button className="btn btn-warning level" onClick={(e) => resetSudoku(initArr)}>
-
-          Try Again
-        </button>
-      </div>
-    );
-  }
-  
-  // const ClickButton = () => {
-  //   const [play] = useSound(click);
-  // };
   return (
     <div className="background">
       <div>
@@ -323,7 +256,7 @@ const navigate=useNavigate()
                     aria-labelledby="example-modal-sizes-title-lg"
                   >
                     <Modal.Header closeButton>
-                      <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-1">Congratulations!</Modal.Title>
+                      <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-2">Congratulations! Your Score: {score} </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <div>
@@ -397,8 +330,49 @@ const navigate=useNavigate()
                   </Modal.Body>
                 </Modal>
                 <div>
-                  <MyStopwatch />
+                  {/* <MyStopwatch /> */}
                 </div>
+                <button className="btn btn-warning level">
+                  <label className="mx-1" for="difficulty">
+                    Difficulty Level:
+                  </label>
+
+                  <select
+                    className="choices"
+                    onChange={(e) => handleOnClick(e)}
+                    name="difficulty"
+                    id="difficulty"
+                  >
+                    <option className="choices" value="null"></option>
+                    <option className="choices" value="demo">Demo</option>
+                    <option className="choices" value="easy">
+                      Easy
+                    </option>
+                    <option className="choices" value="medium">
+                      Medium
+                    </option>
+                    <option className="choices" value="hard">
+                      Hard
+                    </option>
+                  </select>
+                </button>
+                <button
+                  className="btn btn-warning level"
+                  onClick={(e) =>
+                    checkSudoku(
+                      solvedArray,
+                      usergrid,
+                      initArr,
+
+                    )
+                  }
+                >
+                  Finished
+                </button>
+                <button className="btn btn-warning level" onClick={(e) => resetSudoku(initArr)}>
+
+                  Try Again
+                </button>
               </div>
             </div>
           </div>
