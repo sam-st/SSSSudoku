@@ -13,22 +13,19 @@ import Modal from 'react-bootstrap/Modal';
 import "../assets/style/Modal.css";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { useStopwatch } from "react-timer-hook";
 import Comment from '../components/CommentModal';
 import LeaderBoard from '../components/LeaderBoardModal';
 import demo from "../puzzles/demo.json";
+import background from '../assets/bg6.jpg';
 let solvedArray = [];
 let usergrid = [];
 let gameArray = [];
 let initArr = [];
 let randomIndex;
 let level = "";
-let score = 0;
 let startingTime = 0;
 let endingTime = 0;
 let difference = 0;
-let userScore = 0;
-let scoreVar = 0;
 const initial = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -193,7 +190,7 @@ export default function Game() {
   }
 
   return (
-    <div className="background">
+    <div className="body">
       <div>
         <div className="position-relative">
           <div className="game">
@@ -202,13 +199,15 @@ export default function Game() {
               </div>
             </div>
             <div className="position-absolute top-0 start-0 mx-3 mt-3">
-              <MyScoresModal />
+            <InstructionsModal />
+              <a href="/home"><button className="btn btn-warning scoresModal">Home</button></a>
+            </div>
+            <div className="position-absolute top-0 end-0 mx-3 mt-3">
+            <MyScoresModal />
               <Comment />
               <LeaderBoard />
-              <InstructionsModal />
-              <a href="/home"><button className="btn btn-warning scoresModal">Home</button></a>
+              </div>
 
-            </div>
             <div className="game-header">
               <h3 className="mt-2 fs-1">Sudoku</h3>
               <table>
@@ -315,9 +314,9 @@ export default function Game() {
                       <div class="position-absolute top-50 start-50 translate-middle w-100">
                         <div className="text-center">
 
-                          <a href='/game'>
+                          {/* <a href='/game'>
                             <button class="btn btn-sm btn-warning m-2" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>
-                          </a>
+                          </a> */}
 
                           <a href='/home'>
                             <button class="btn btn-sm btn-warning m-2" type="button">Home</button>

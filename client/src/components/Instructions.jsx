@@ -1,6 +1,8 @@
 import howToPlay from '../assets/howtoplay.png';
 import howNotToPlay from '../assets/hownottoplay.png';
 import React from 'react';
+import background from '../assets/bg6.jpg';
+import '../style.css';
 export default function Instructions() {
   const button2Style = {
     margin: "0 10px", // Add margin between buttons
@@ -16,18 +18,18 @@ export default function Instructions() {
     borderRadius: '16px'
   };
     return (
-    <div>
+      <div className="body">
       <div className='text-center '>
 
-      <h1 className='text-center text-white'><em>How To Play: </em></h1>
+      <h1 className='text-center text-black'><em>How To Play: </em></h1>
       <ul className='list-group text-center'>
-        <li className='text-white fs-3'>
+        <li className='text-black fs-3'>
           Have each 3x3 square, each row, and each column have a number from 1 - 9.
         </li>
 
         
          <img src= {howToPlay} className="img-fluid mx-auto d-block card-img-top rounded" style={{ width: "16%" }} alt="site pictures"></img>
-        <li className='text-white fs-3'>
+        <li className='text-black fs-3'>
           No repeat numbers allowed per row, column, or 3x3 square.
         </li>
         <img src= {howNotToPlay}className="img-fluid mx-auto d-block card-img-top rounded" style={{ width: "16%" }} alt="site pictures"></img>

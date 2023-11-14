@@ -4,6 +4,7 @@ import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import "../style.css";
 import { useMutation } from '@apollo/react-hooks';
 import Auth from '../utils/auth';
+import background from '../assets/bg6.jpg';
 
 
 function Login() {
@@ -56,38 +57,38 @@ function Login() {
   };
 
   return (
-    <div className="">
+    <div className="body">
 
       <Container className="w-100 h-100">
         <Row>
-          <Col className='mt-4 mx-1 border border-white'>
-            <h1 className=' text-white'>Login</h1>
+          <Col className='mt-4 mx-1 border border-black'>
+            <h1 className=' text-black'>Login</h1>
             <Form onSubmit={handleLoginSubmit} autocomplete="off" >
               <Form.Group controlId="loginUsername">
-                <Form.Label className='mt-3 fs-4 text-white'>Username</Form.Label>
+                <Form.Label className='mt-3 fs-4 text-black'>Username</Form.Label>
                 <Form.Control type="text" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} autocomplete="off" autoComplete="new-password" />
               </Form.Group>
               <Form.Group controlId="loginPassword">
-                <Form.Label className='mt-4 fs-4 text-white'>Password</Form.Label>
+                <Form.Label className='mt-4 fs-4 text-black'>Password</Form.Label>
                 <Form.Control type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} autoComplete="new-password" autocomplete="off" />
               </Form.Group>
               <Button className='mt-4' variant="warning" type="submit">Login</Button>
             </Form>
           </Col>
-          <Col className='mt-4 mx-1 border border-white'>
+          <Col className='mt-4 mx-1 border border-black'>
 
-            <h1 className='mt-1 fs-1  text-white'>Sign Up</h1>
+            <h1 className='mt-1 fs-1  text-black'>Sign Up</h1>
             <Form onSubmit={handleSignupSubmit}>
               <Form.Group controlId="signupUsername">
-                <Form.Label className='fs-4 text-white mb-0'>Username</Form.Label>
+                <Form.Label className='fs-4 text-black mb-0'>Username</Form.Label>
                 <Form.Control type="text" value={signupUsername} onChange={(e) => setSignupUsername(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="signupPassword">
-                <Form.Label className='fs-4 text-white mt-1 mb-0'>Password</Form.Label>
+                <Form.Label className='fs-4 text-black mt-1 mb-0'>Password</Form.Label>
                 <Form.Control type="password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="signupEmail">
-                <Form.Label className='fs-4 text-white mt-1 mb-0'>Email</Form.Label>
+                <Form.Label className='fs-4 text-black mt-1 mb-0'>Email</Form.Label>
                 <Form.Control type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
               </Form.Group>
               <Button className='my-2' variant="warning" type="submit">Sign Up</Button>

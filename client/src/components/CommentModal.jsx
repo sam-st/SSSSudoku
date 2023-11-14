@@ -12,14 +12,15 @@ function LeaderBoardModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { loading, error, data } = useQuery(QUERY_me);
+  // const { loading, error, data } = useQuery(QUERY_me);
 
-  if (loading) return <p>Please wait...</p>;
-  if (error) return <p>Sorry, could not load user data</p>;
+  // if (loading) return <p>Please wait...</p>;
+  // if (error) return <p>Sorry, could not load user data</p>;
 
   return (
     <>
-      <Button className="btn btn-warning scoresModal " onClick={handleShow}>
+    
+      <Button className="btn btn-warning scoresModal m-1 " onClick={handleShow}>
         Comments
       </Button>
       <Modal show={show} onHide={handleClose}>

@@ -12,14 +12,14 @@ function MyScoresModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { loading, error, data } = useQuery(QUERY_me);
+  // const { loading, error, data } = useQuery(QUERY_me);
 
-  if (loading) return <p>Please wait...</p>;
-  if (error) return <p>Sorry, could not load user data</p>;
+  // if (loading) return <p>Please wait...</p>;
+  // if (error) return <p>Sorry, could not load user data</p>;
 
   return (
     <>
-      <Button className="btn btn-warning scoresModal " onClick={handleShow}>
+      <Button className="btn btn-warning scoresModal m-1 " onClick={handleShow}>
         See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -36,13 +36,13 @@ function MyScoresModal() {
               </tr>
             </thead>
             <tbody>
-              {data.me.map((user) => (
+              {/* {data.me.map((user) => (
                 <tr key={user._id}>
                   <td>{user.username}</td>
                   <td>{user.gameStat && user.gameStat[0] ? user.gameStat[0].score : 'N/A'}</td>
                   <td>{user.gameStat && user.gameStat[0] ? user.gameStat[0].difficulty : 'N/A'}</td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </Table>
         </Modal.Body>
