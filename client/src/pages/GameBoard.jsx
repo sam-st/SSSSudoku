@@ -166,8 +166,6 @@ const navigate=useNavigate()
     var scoreVar = 1800 - (minutes * 60 + seconds);
     scoreVar = calculateScore(level, scoreVar);
     setScore(scoreVar);
-
-    ) {
     //score = 1800 - (minutes * 60 + seconds);
    //score = calculateScore(level, score);
     
