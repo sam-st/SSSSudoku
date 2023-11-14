@@ -26,6 +26,7 @@ const typeDefs = `
   type Query {
     me: [User]
     getThought(thoughtId: ID!): Thought
+    getGameStat(userId: ID!): GameStat
   }
 
   type Mutation {

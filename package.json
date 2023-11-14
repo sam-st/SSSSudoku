@@ -17,6 +17,7 @@
         "concurrently": "^8.2.0"
     },
     "dependencies": {
+        "@hookform/resolvers": "^3.3.2",
         "react-confetti": "^6.1.0",
 
         "react-confetti-canvas": "^0.1.1",
