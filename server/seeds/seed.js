@@ -8,11 +8,11 @@ db.once('open', async () => {
 	try {
 		await cleanDB();
 
-		const username = "master";
-		const email = "master@master.com";
-		const password = "masterpass";
+		// const username = "master";
+		// const email = "master@master.com";
+		// const password = "masterpass";
 
-		await User.create({ username, email, password });
+		// await User.create({ username, email, password });
 
 		await User.create(userData)
 
