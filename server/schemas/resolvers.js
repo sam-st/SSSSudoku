@@ -1,3 +1,4 @@
+const { Error } = require('mongoose');
 const { User, Thought, GameStat } = require('../models');
 // const { findById } = require('../models/User');
 const { signToken, AuthenticationError } = require('../utils/auth');
@@ -6,6 +7,18 @@ const resolvers = {
   Query: {
     me: async () => {
       return User.find({});
+    },
+    getGameStat: async (_, { userId }) => {
+      try {
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error('User not found');
+        }
+        return user.gameStat || [];
+      } catch {
+        console.error(error);
+        throw new Error('Cant get user game stats')
+      }
     },
     // getThought: async (thoughtId) => {
     //   const thought = await Thought.findOne({
