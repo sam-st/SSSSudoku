@@ -59,7 +59,7 @@ After completion of the puzzle, the player gets their score based on the difficu
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src=""/> <br />
+        <img src="./client/src/assets/Screenshot 2023-11-15 175711.png"/> <br />
         <sub><b>Scores modal</b></sub>
         </a>
       </td>
