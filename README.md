@@ -1,6 +1,6 @@
 # SSSSudoku
 
-  ![Static Badge](https://img.shields.io/badge/license-MIT-blue.svg)
+![Static Badge](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Table of Contents
   
@@ -12,12 +12,11 @@
   - [Installation](#installation)
   - [Usage](#usage)
   - [Contributors](#contributors)
-  - [Test](#testing)
   - [License](#license)
 
 
 ## Description
-ok
+
 
 ## Website-Link
 
@@ -27,28 +26,28 @@ ok
   <tbody>
     <tr>
       <td align="center" align="top" width="12%">
-        <img src="https://github.com/sjones-njones/Recipe-Book-Group-3-Project-2/assets/132960605/18f1831e-a03d-4348-b5c9-d4a34f365767" width="500px" alt="login-signup-view"/> <br />
-        <sub><b>Login/Signup View</b></sub>
+        <img src=""/> <br />
+        <sub><b>Login/Signup</b></sub>
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src="https://github.com/sjones-njones/Recipe-Book-Group-3-Project-2/assets/132960605/40795811-a6e3-421e-b7ae-de7140b26a81" width="500px" alt="logout-view"/> <br />
-        <sub><b>Logout View</b></sub>
+        <img src=""/> <br />
+        <sub><b>Landing-Page</b></sub>
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src="https://github.com/sjones-njones/Recipe-Book-Group-3-Project-2/assets/132960605/408c7ff6-37ad-454e-a822-589dc8b0950c" width="500px" alt="loggedin-view"/> <br />
-        <sub><b>Logged-In View</b></sub>
+        <img src=""/> <br />
+        <sub><b>Sudoku Game</b></sub>
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src="https://github.com/sjones-njones/Recipe-Book-Group-3-Project-2/assets/132960605/86d953c8-a78b-4029-975e-2abd0f2324dd" width="500px" alt="recipe-details-view"/> <br />
-        <sub><b>Recipe Details View</b></sub>
+        <img src=""/> <br />
+        <sub><b>How to play modal</b></sub>
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src="https://github.com/sjones-njones/Recipe-Book-Group-3-Project-2/assets/132960605/ccaa25e1-b2cb-4f2d-9a2c-35fcc29faab2" width="500px" alt="recipebook-view"/> <br />
-        <sub><b>Recipe Book View</b></sub>
+        <img src=""/> <br />
+        <sub><b>Scores modal</b></sub>
         </a>
       </td>
     </tr>
@@ -78,10 +77,10 @@ ok
 <img height="90" alt="CSS" height="50" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain-wordmark.svg">
 &nbsp;&nbsp;
 <img height="90" alt="Bootstrap" height="50" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg">
-&nbsp;
+&nbsp;&nbsp;
 <img height="90" alt="ESlint" height="50" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/eslint/eslint-original-wordmark.svg">
 &nbsp;&nbsp;
-<img height="90" alt="mongoose" height="50" width="80" src="./client/src/assets/images/mongoose-transparent-logo.png">
+<img height="90" alt="mongoose" height="50" width="90" src="./client/src/assets/images/mongoose-transparent-logo.png">
 &nbsp;&nbsp;
 
 ## Installation
@@ -98,7 +97,7 @@ To install Locally, download:
 
 ## Usage
 
-okok
+
 
 ## Contributors
 
