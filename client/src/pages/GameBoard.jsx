@@ -199,17 +199,17 @@ export default function Game() {
               </div>
             </div>
             <div className="position-absolute top-0 start-0 mx-3 mt-3">
-            <InstructionsModal />
-              <a href="/home"><button className="btn btn-warning scoresModal">Home</button></a>
+              <InstructionsModal />
+              <a href="/home"><button className="btn btn-info scoresModal">Home</button></a>
             </div>
             <div className="position-absolute top-0 end-0 mx-3 mt-3">
-            <MyScoresModal />
-              <Comment />
-              <LeaderBoard />
-              </div>
+              <MyScoresModal />
+              {/* <Comment /> */}
+              {/* <LeaderBoard /> */}
+            </div>
 
             <div className="game-header">
-              <h3 className="mt-2 fs-1">Sudoku</h3>
+              <h3 className="mt-2 fs-1 text-black buttonContainer">Sudoku</h3>
               <table>
                 <tbody>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
@@ -247,7 +247,6 @@ export default function Game() {
               </table>
               <div className="buttonContainer">
                 <>
-
                   <Modal
                     size="lg"
                     show={lgShow}
@@ -255,37 +254,40 @@ export default function Game() {
                     aria-labelledby="example-modal-sizes-title-lg"
                   >
                     <Modal.Header closeButton>
-                      <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-2">Congratulations! Your Score: {score} </Modal.Title>
+                      <Modal.Title id="example-modal-sizes-title-lg" className="text-black fs-1">Congratulations! Your Score: {score}
+                      
+                       </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                      <div class="input-group-append mx-2 position-relative">
+
+{Auth.loggedIn() ? (
+  <button className="btn btn-info mx-1" onClick={handleClick} type="button">Save</button>
+) : (<a href="#"> <button onClick={saveFinalScore}
+  className="btn btn-info mx-1">
+  Login
+</button>
+</a>)}
+<a href='/game'>
+  <button class="btn btn-info mx-1" type="button">Play Again</button>
+</a>
+<a href='/home'>
+  <button class="btn btn-info mx-1" type="button">Home</button>
+</a>
+</div>
                       <div>
-                        <div class="position-absolute top-50 start-50 translate-middle w-100">
-                          <div className='mx-2 input-group mb-3'>
-                            <input className='form-control'
+                        <div class="">
+                          {/* <div className='mx-2 input-group mb-3'> */}
+                          {/* <input className='form-control'
                               type="text"
                               placeholder="Type you comment here!"
                               id="message"
                               name="message"
                               onChange={handleChange}
                               value={comment}
-                            />
-                            <div class="input-group-append mx-2">
-
-                              {Auth.loggedIn() ? (
-                                <button className="btn btn-warning mx-1" onClick={handleClick} type="button">Save</button>
-                              ) : (<a href="#"> <button onClick={saveFinalScore}
-                                className="btn btn-warning mx-1">
-                                Login
-                              </button>
-                              </a>)}
-                              <a href='/game'>
-                                <button class="btn btn-warning mx-1" type="button">Play Again</button>
-                              </a>
-                              <a href='/home'>
-                                <button class="btn btn-warning mx-1" type="button">Home</button>
-                              </a>
-                            </div>
-                          </div>
+                            /> */}
+                      
+                          {/* </div> */}
                         </div>
                         <div className="position-absolute bottom-0 start-00 translate-middle-x">
                           <Confetti
@@ -315,11 +317,11 @@ export default function Game() {
                         <div className="text-center">
 
                           {/* <a href='/game'>
-                            <button class="btn btn-sm btn-warning m-2" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>
+                            <button class="btn btn-sm btn-info m-2" onClick={(e) => resetSudoku(randomIndex, solvedArray, unsolvedArray)} type="button">Try Again</button>
                           </a> */}
 
                           <a href='/home'>
-                            <button class="btn btn-sm btn-warning m-2" type="button">Home</button>
+                            <button class="btn btn-sm btn-info m-2" type="button">Home</button>
                           </a>
                         </div>
                       </div>
@@ -331,7 +333,7 @@ export default function Game() {
                 <div>
                   {/* <MyStopwatch /> */}
                 </div>
-                <button className="btn btn-warning level">
+                <button className="btn btn-info level ">
                   <label className="mx-1" for="difficulty">
                     Difficulty Level:
                   </label>
@@ -356,7 +358,7 @@ export default function Game() {
                   </select>
                 </button>
                 <button
-                  className="btn btn-warning level"
+                  className="btn btn-info level"
                   onClick={(e) =>
                     checkSudoku(
                       solvedArray,
@@ -368,7 +370,7 @@ export default function Game() {
                 >
                   Finished
                 </button>
-                <button className="btn btn-warning level" onClick={(e) => resetSudoku(initArr)}>
+                <button className="btn btn-info level" onClick={(e) => resetSudoku(initArr)}>
 
                   Try Again
                 </button>
@@ -376,6 +378,115 @@ export default function Game() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="wrap">
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            1
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            2
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            3
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            4
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            5
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            6
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            7
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            8
+          </text>
+        </svg>
+
+        <svg className="svg">
+          <text
+            x="10"
+            y="90"
+            font-family="Helvetica, Arial, sans-serif"
+            font-size="80"
+            fill="black"
+          >
+            9
+          </text>
+        </svg>
       </div>
     </div>
   );

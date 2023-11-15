@@ -29,7 +29,7 @@ function LeaderBoardModal() {
 
   return (
     <>
-      <Button className="btn btn-warning scoresModal " onClick={handleShow}>
+      <Button className="btn btn-info scoresModal " onClick={handleShow}>
         LeaderBoard
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -57,7 +57,7 @@ function LeaderBoardModal() {
           </Table>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn btn-warning" onClick={handleClose}>
+          <Button className="btn btn-info" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

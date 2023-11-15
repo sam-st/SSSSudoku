@@ -21,7 +21,7 @@ function LeaderBoardModal() {
   return (
     <>
     
-      <Button className="btn btn-warning scoresModal m-1 " onClick={handleShow}>
+      <Button className="btn btn-info scoresModal m-1 " onClick={handleShow}>
         Comments
       </Button>
       <Modal show={show} onHide={handleClose}>

@@ -72,7 +72,7 @@ function Login() {
                 <Form.Label className='mt-4 fs-4 text-black'>Password</Form.Label>
                 <Form.Control type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} autoComplete="new-password" autocomplete="off" />
               </Form.Group>
-              <Button className='mt-4' variant="warning" type="submit">Login</Button>
+              <Button className='mt-4' variant="info" type="submit">Login</Button>
             </Form>
           </Col>
           <Col className='mt-4 mx-1 border border-black'>
@@ -91,7 +91,7 @@ function Login() {
                 <Form.Label className='fs-4 text-black mt-1 mb-0'>Email</Form.Label>
                 <Form.Control type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
               </Form.Group>
-              <Button className='my-2' variant="warning" type="submit">Sign Up</Button>
+              <Button className='my-2' variant="info" type="submit">Sign Up</Button>
             </Form>
           </Col>
         </Row>
@@ -99,12 +99,12 @@ function Login() {
 
           <div className="position-absolute bottom-0 start-0 mx-2 mb-2">
             {Auth.loggedIn() ? (
-              <a href="/game" > <button className="btn btn-warning">
+              <a href="/game" > <button className="btn btn-info">
                 Play
               </button>
               </a>
             ) : (
-              <a href="/home" > <button className="btn btn-warning">
+              <a href="/home" > <button className="btn btn-info">
                 Home
               </button>
               </a>
@@ -114,7 +114,9 @@ function Login() {
           </div>
         </div>
       </Container>
+      
     </div>
+
   );
 }
 
