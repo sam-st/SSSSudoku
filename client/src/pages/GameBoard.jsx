@@ -82,7 +82,7 @@ export default function Game() {
   function saveFinalScore() {
     localStorage.setItem("score", score);
     localStorage.setItem("completed", true);
-    navigate('/login')
+    // navigate('/login')
   }
 
   function chooseDifficulty(difficultyLevel) {
@@ -198,18 +198,36 @@ export default function Game() {
               <div className="modalButtons position-absolute top-0 end-0">
               </div>
             </div>
-            <div className="position-absolute top-0 start-0 mx-3 mt-3">
+            <div className=" buttonContainer position-absolute top-0 start-0 mx-3 mt-3">
               <InstructionsModal />
-              <a href="/home"><button className="btn btn-info scoresModal">Home</button></a>
+              <a href="/home"><button className="btn btn-info scoresModal mx-1">Home</button></a>
             </div>
-            <div className="position-absolute top-0 end-0 mx-3 mt-3">
-              <MyScoresModal />
+            <div className=" buttonContainer position-absolute top-0 end-0 mx-3 mt-3">
+              {/* <MyScoresModal /> */}
               {/* <Comment /> */}
               {/* <LeaderBoard /> */}
+              <button
+                  className="btn btn-info mx-0 level"
+                  onClick={(e) =>
+                    checkSudoku(
+                      solvedArray,
+                      usergrid,
+                      initArr,
+
+                    )
+                  }
+                >
+                  Finished
+                </button>
+              <button className="btn btn-info level" onClick={(e) => resetSudoku(initArr)}>
+                
+
+Try Again
+</button>
             </div>
 
             <div className="game-header">
-              <h3 className="mt-2 fs-1 text-black buttonContainer">Sudoku</h3>
+              <h3 className="mt-2 fs-1 bg-info  rounded text-black buttonContainer">Sudoku</h3>
               <table>
                 <tbody>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
@@ -261,13 +279,13 @@ export default function Game() {
                     <Modal.Body>
                       <div class="input-group-append mx-2 position-relative">
 
-{Auth.loggedIn() ? (
-  <button className="btn btn-info mx-1" onClick={handleClick} type="button">Save</button>
+{/* {Auth.loggedIn() ? ( */}
+  {/* <button className="btn btn-info mx-1" onClick={handleClick} type="button">Save</button>
 ) : (<a href="#"> <button onClick={saveFinalScore}
   className="btn btn-info mx-1">
   Login
 </button>
-</a>)}
+</a>)} */}
 <a href='/game'>
   <button class="btn btn-info mx-1" type="button">Play Again</button>
 </a>
@@ -357,7 +375,7 @@ export default function Game() {
                     </option>
                   </select>
                 </button>
-                <button
+                {/* <button
                   className="btn btn-info level"
                   onClick={(e) =>
                     checkSudoku(
@@ -369,11 +387,11 @@ export default function Game() {
                   }
                 >
                   Finished
-                </button>
-                <button className="btn btn-info level" onClick={(e) => resetSudoku(initArr)}>
+                </button> */}
+                {/* <button className="btn btn-info level" onClick={(e) => resetSudoku(initArr)}>
 
                   Try Again
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
