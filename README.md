@@ -1,4 +1,5 @@
 # SSSSudoku
+A logical number-placement puzzle.
 
 ![Static Badge](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -17,6 +18,18 @@
 
 ## Description
 
+SSSSudoku is a fullstack web application created from scratch. The objective of this game is to fill a 9x9 grid with numbers so every column, every row, and every 3x3 subgrid region contains all digits from 1-9. In this application, the puzzle begins with digits already filled in some of the cells. The user is challenged with completing the rest of the grid following game rules.
+
+Here is a breakdown of how Sudoku puzzle is typically played:
+  * First, as mentioned above, the puzzle is a partially filled 9x9 grid. The user has the option to choose between three levels(difficulty): Easy for begginners, Medium: for players familiar with the puzzle game, and Hard: for experienced players.
+  * The rules are simple:
+    * Each row nd column must contain all digits from 1 to 9 without repeating.
+    * Also, the 3x3 subgrids must condition all digits without repeating.
+  * Logic and strategy is a users bestfriend with this puzzle. Checking rows and columns for possible placement of numbers is encouraged. Analyzing subgrids to find missing numbers is a good strategy used amongst avid players of Sudoku.
+  * The puzzle is complete when all boxes in the 9x9 grid is filled and numbers satisfy the rules of Sudoku.
+  * Finally, Have fun playing SSSSudoku!
+
+After completion of the puzzle, the player gets their score based on the difficulty they chose and time they completed the game. The player can then save their score to a high scores modal and compare to other players. Dont forget to leave a comment in the comment modal about your thoughts on the puzzle game.
 
 ## Website-Link
 
@@ -97,7 +110,13 @@ To install Locally, download:
 
 ## Usage
 
+To use application locally after installing VS Code, Node, and Express:
 
+- Clone this repository to yor local computer via Terminal or GitBash
+- Open repository in VS Code.
+- Open integrated terminal and install dependencies by typing `npm install` in client, server, and parent package.json files.
+- Finally, run `npm run develop`.
+- This app will automatically open the default browser and generate a webpage using Vite.
 
 ## Contributors
 
