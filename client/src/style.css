@@ -9,9 +9,12 @@ body {
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(17, 207, 198);
+  background-color: rgb(17, 207, 42);
   font-size: 14px;
   overflow: hidden;
+}
+.buttonContainer{
+  z-index: 999; /* Set a higher z-index for the row background */
 }
 
 .card {

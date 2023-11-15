@@ -45,7 +45,7 @@ function MyScoresModal() {
 
   return (
     <>
-      <Button className="btn btn-warning scoresModal m-1 " onClick={handleShow}>
+      <Button className="btn btn-info scoresModal m-1 " onClick={handleShow}>
         See My Scores
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -81,7 +81,7 @@ function MyScoresModal() {
           </Table>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn btn-warning" onClick={handleClose}>
+          <Button className="btn btn-info" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

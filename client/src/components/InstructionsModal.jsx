@@ -10,7 +10,7 @@ function InstructionsModal() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button className="btn btn-warning instructionsModal" onClick={handleShow}>
+      <Button className="btn btn-lg btn-info instructionsModal" onClick={handleShow}>
         How to Play      </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
@@ -29,7 +29,7 @@ function InstructionsModal() {
           </ul>
         </Modal.Body>
         <Modal.Footer>
-          <Button className='btn btn-warning' onClick={handleClose}>
+          <Button className='btn btn-info' onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

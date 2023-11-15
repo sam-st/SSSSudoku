@@ -44,7 +44,7 @@ export default function Comment() {
   };
   return (
     <>
-      <Button className="btn btn-warning instructionsModal" onClick={handleShow}>
+      <Button className="btn btn-info instructionsModal" onClick={handleShow}>
         How to Play      </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -74,14 +74,14 @@ export default function Comment() {
                   onChange={handleChange}
                   value={comment}
                 />
-                <button className='btn btn-warning' onClick={handleClick}>Save</button>
+                <button className='btn btn-info' onClick={handleClick}>Save</button>
               </div>
             </div>
             <div class="position-absolute bottom-0 start-50 translate-middle-x">
-              <a href="/game" className="btn btn-warning mb-5" style={button2Style}>
+              <a href="/game" className="btn btn-info mb-5" style={button2Style}>
                 Play Again
               </a>
-              <a href="/home" className="btn btn-warning mb-5" style={button2Style}>
+              <a href="/home" className="btn btn-info mb-5" style={button2Style}>
                 Home        </a>
             </div>
           </div>
