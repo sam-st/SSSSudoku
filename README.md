@@ -32,6 +32,9 @@ Here is a breakdown of how Sudoku puzzle is typically played:
 After completion of the puzzle, the player gets their score based on the difficulty they chose and time they completed the game. The player can then save their score to a high scores modal and compare to other players. Dont forget to leave a comment in the comment modal about your thoughts on the puzzle game.
 
 ## Website-Link
+https://dry-sands-01310-b65cef519a9a.herokuapp.com/
+https://github.com/sam-st/SSSSudoku.git
+
 
 ## Views
 
@@ -39,25 +42,21 @@ After completion of the puzzle, the player gets their score based on the difficu
   <tbody>
     <tr>
       <td align="center" align="top" width="12%">
-        <img src=""/> <br />
+               <img src="./client/src/assets/Screenshot 2023-11-15 174527.png"/> <br />
         <sub><b>Login/Signup</b></sub>
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src=""/> <br />
+               <img src="./client/src/assets/Screenshot 2023-11-15 173742.png"/> <br />
         <sub><b>Landing-Page</b></sub>
         </a>
       </td>
       <td align="center" align="top" width="12%">
-        <img src=""/> <br />
+               <img src="./client/src/assets/Screenshot 2023-11-15 174800.png"/> <br />
         <sub><b>Sudoku Game</b></sub>
         </a>
       </td>
-      <td align="center" align="top" width="12%">
-        <img src=""/> <br />
-        <sub><b>How to play modal</b></sub>
-        </a>
-      </td>
+          </td>
       <td align="center" align="top" width="12%">
         <img src="./client/src/assets/Screenshot 2023-11-15 175711.png"/> <br />
         <sub><b>Scores modal</b></sub>
