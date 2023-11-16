@@ -33,6 +33,9 @@ After completion of the puzzle, the player gets their score based on the difficu
 
 ## Website-Link
 
+https://dry-sands-01310-b65cef519a9a.herokuapp.com/
+https://github.com/sam-st/SSSSudoku.git
+
 ## Views
 
 <table>
